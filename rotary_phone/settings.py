@@ -33,6 +33,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
 ]
 
 THIRD_PARTY_APPS = []
@@ -191,7 +192,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = [
+    path.join(BASE_DIR, "static"),
+    "/var/www/static/",
+]
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -200,6 +216,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DJANGO_SU_EMAIL = getenv("DJANGO_SU_EMAIL")
 DJANGO_SU_NAME = getenv("DJANGO_SU_NAME")
+DJANGO_PORT = getenv("DJANGO_PORT", 8000)
 
 log.debug(f"DJANGO_SU_EMAIL: {DJANGO_SU_EMAIL}")
 log.debug(f"DJANGO_SU_NAME: {DJANGO_SU_NAME}")
