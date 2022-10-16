@@ -1,5 +1,5 @@
 from os import getenv
-from django.contrib.auth.models import User
+from main.home.models import User
 
 from django.core.management.base import BaseCommand
 from django.conf import settings

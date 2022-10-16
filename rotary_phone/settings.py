@@ -36,7 +36,9 @@ DJANGO_APPS = [
     "django.contrib.humanize",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "crispy_forms"
+]
 
 LOCAL_APPS = [
     "main.home.apps.HomeConfig",
@@ -220,3 +222,11 @@ DJANGO_PORT = getenv("DJANGO_PORT", 8000)
 
 log.debug(f"DJANGO_SU_EMAIL: {DJANGO_SU_EMAIL}")
 log.debug(f"DJANGO_SU_NAME: {DJANGO_SU_NAME}")
+
+# Auth model
+AUTH_USER_MODEL = "home.User"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# login
+LOGIN_REDIRECT_URL = "home:home_list_view"
+LOGOUT_REDIRECT_URL = "/login"
