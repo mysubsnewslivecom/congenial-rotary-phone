@@ -37,11 +37,14 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "crispy_forms"
-]
+    "crispy_forms",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
+    "rest_framework",]
 
 LOCAL_APPS = [
     "main.home.apps.HomeConfig",
+    "main.api.apps.ApiConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -230,3 +233,43 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # login
 LOGIN_REDIRECT_URL = "home:home_list_view"
 LOGOUT_REDIRECT_URL = "/login"
+
+CSRF_COOKIE_SECURE = True
+
+# DJANGO REST FRAMEWORK
+# ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    # General
+    "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
+    # Pagination
+    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    # "PAGE_SIZE": int(getenv("DJANGO_PAGINATION_LIMIT", 10)),
+    # Render
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
+    ),
+    # Permission/Authentication
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    # Throttling
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {"anon": "100/day", "user": "100000/day"},
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Portal API",
+    "DESCRIPTION": "Timepass project on django",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
+}
+

@@ -22,6 +22,19 @@ class UserLoginView(LoginView):
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "home.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pending_review"] = 10
+        context["open_tasks"] = 5
+        context["unread_articles"] = 700
+        context["budget_remaining"] = 200
+        context["budget_consumed"] = "100,000.00"
+        context["current_ip"] = "172.19.166.98"
+        context["international_space_station"] = "-26.9884, -38.6396"
+        context["temperature"] = "-26.9884"
+        return context
+
+
 
 class UserLogout(LogoutView):
     next_page = settings.LOGOUT_REDIRECT_URL

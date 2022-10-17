@@ -2,6 +2,8 @@ from loguru import logger
 from typing import Optional
 from django.conf import settings
 import sys
+from os import getenv
+from requests import request
 
 
 class LoggingService:
@@ -35,3 +37,27 @@ class LoggingService:
 
     def error(self, message):
         logger.error(message)
+
+
+class OpenWeather:
+    def __init__(
+        self,
+        open_weather_key: str = getenv("OPEN_WEATHER_API_KEY", "NA"),
+        open_weather_url: str = getenv("OPEN_WEATHER_BASEURL", "NA"),
+        **kwargs,
+    ):
+        super().__init__()
+        # self.open_weather_key = settings.OPEN_WEATHER_API_KEY
+        # self.open_weather_url = settings.OPEN_WEATHER_BASEURL
+        self.open_weather_key = open_weather_key
+        self.open_weather_url = open_weather_url
+        assert self.open_weather_key, "OPEN_WEATHER_API_KEY is not provided"
+        assert self.open_weather_url, "OPEN_WEATHER_BASEURL is not provided"
+
+    def get_weather(self, location: str):
+
+        OPEN_WEATHER_URL = (
+            self.open_weather_url + location + "&appid=" + self.open_weather_key
+        )
+        resp = request(url=OPEN_WEATHER_URL, method="GET")
+        return resp.json()
