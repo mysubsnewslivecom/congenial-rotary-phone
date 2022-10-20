@@ -10,4 +10,3 @@ class Command(BaseCommand):
         call_command("initiateadmin")
         if settings.DEBUG:
             call_command("runserver", f"0.0.0.0:{settings.DJANGO_PORT}")
-            

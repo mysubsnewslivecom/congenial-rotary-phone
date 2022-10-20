@@ -1,8 +1,9 @@
-from loguru import logger
-from typing import Optional
-from django.conf import settings
 import sys
 from os import getenv
+from typing import Optional
+
+from django.conf import settings
+from loguru import logger
 from requests import request
 
 
@@ -42,8 +43,8 @@ class LoggingService:
 class OpenWeather:
     def __init__(
         self,
-        open_weather_key: str = getenv("OPEN_WEATHER_API_KEY", "NA"),
-        open_weather_url: str = getenv("OPEN_WEATHER_BASEURL", "NA"),
+        open_weather_key: Optional[str] = getenv("OPEN_WEATHER_API_KEY"),
+        open_weather_url: Optional[str] = getenv("OPEN_WEATHER_BASEURL"),
         **kwargs,
     ):
         super().__init__()
@@ -51,13 +52,22 @@ class OpenWeather:
         # self.open_weather_url = settings.OPEN_WEATHER_BASEURL
         self.open_weather_key = open_weather_key
         self.open_weather_url = open_weather_url
+        self.log = LoggingService()
+
         assert self.open_weather_key, "OPEN_WEATHER_API_KEY is not provided"
         assert self.open_weather_url, "OPEN_WEATHER_BASEURL is not provided"
 
-    def get_weather(self, location: str):
+    def get_weather(self, location: str = "Krakow"):
 
-        OPEN_WEATHER_URL = (
-            self.open_weather_url + location + "&appid=" + self.open_weather_key
+        OPEN_WEATHER_URL = "".join(
+            [
+                str(self.open_weather_url),
+                location,
+                "&appid=",
+                str(self.open_weather_key),
+            ]
         )
+
         resp = request(url=OPEN_WEATHER_URL, method="GET")
+
         return resp.json()

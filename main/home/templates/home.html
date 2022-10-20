@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
 
@@ -26,6 +27,9 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
   }
 </style>
+
+<link rel="stylesheet" href="{% static 'dist/css/pages/home/home.css' %}">
+
 {% endblock css %}
 
 {% block headers %}Dashboard{% endblock headers %}
@@ -38,7 +42,7 @@
 
   {% include 'dashboard/widgets/current_temperature.html' with temperature=temperature %}
 
-  {% include 'dashboard/widgets/pending_review.html'  with pending_reviewopen_tasksunread_articles=pending_review %}
+  {% include 'dashboard/widgets/pending_review.html' with pending_reviewopen_tasksunread_articles=pending_review %}
 
   {% include 'dashboard/widgets/open_tasks.html' with open_tasksunread_articles=open_tasksunread_articles %}
 
@@ -50,23 +54,20 @@
 
   {% include 'dashboard/widgets/budget_consumed.html' with current_ip=current_ip %}
 
-  {% include 'dashboard/widgets/international_space_station.html' with international_space_station=international_space_station %}
+  {% include 'dashboard/widgets/international_space_station.html' with location=international_space_station %}
 
 </div>
 
 <div class="row">
 
-  <div class="col-lg-2 col-6">
-    <div class="small-box bg-dark text-white">
-      <div class="inner">
-        <h3 class="p-2" id="idISSLocation">{{ count|default:'0.0, 0.0' }}</h3>
-      </div>
-      <p class="small-box-footer">International Space location</p>
-    </div>
-  </div>
+  {% include 'dashboard/widgets/timer.html' %}
 
 </div>
 
 {% endblock content %}
 
-{% block js %}{% endblock js %}
+{% block js %}
+
+<script src="{% static 'dist/js/pages/home/home.js' %}" type="application/javascript"></script>
+
+{% endblock js %}

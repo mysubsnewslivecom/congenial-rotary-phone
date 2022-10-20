@@ -1,7 +1,7 @@
 from crispy_forms.helper import FormHelper
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.forms import BooleanField, CharField, ModelForm, TextInput, CheckboxInput
+from django.forms import BooleanField, CharField, CheckboxInput, TextInput
 
 
 class CustomUserAuthenticationForm(AuthenticationForm):

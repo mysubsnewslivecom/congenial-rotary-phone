@@ -1,8 +1,8 @@
-from pathlib import Path
 from os import getenv, path
-from loguru import logger
+from pathlib import Path
+
 import dj_database_url
-import sys
+
 from main.utility.functions import LoggingService
 
 DEBUG = bool(getenv("DJANGO_DEBUG", "True") == "True")
@@ -40,11 +40,13 @@ THIRD_PARTY_APPS = [
     "crispy_forms",
     "drf_spectacular",
     "drf_spectacular_sidecar",
-    "rest_framework",]
+    "rest_framework",
+]
 
 LOCAL_APPS = [
     "main.home.apps.HomeConfig",
     "main.api.apps.ApiConfig",
+    "main.gitsvn.apps.GitsvnConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -236,6 +238,10 @@ LOGOUT_REDIRECT_URL = "/login"
 
 CSRF_COOKIE_SECURE = True
 
+# SLASH
+
+APPEND_SLASH = False
+
 # DJANGO REST FRAMEWORK
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
@@ -272,4 +278,3 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
-

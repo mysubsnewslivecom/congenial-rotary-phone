@@ -1,9 +1,11 @@
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from main.api import views
 
 # from django.conf.urls import url
 from rest_framework import routers
+
+from main.api import views
+
 app_name = "api"
 
 # newly registered ViewSet
@@ -27,5 +29,4 @@ urlpatterns = [
         view=views.OpenWeatherAPI.as_view(),
         name="openweather_list_view",
     ),
-
 ]

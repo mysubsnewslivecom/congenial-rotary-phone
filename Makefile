@@ -31,7 +31,7 @@ checkmigrations:
 	source /home/linux/workspace/venv@adminlte/.env.linux && \
 	python3 manage.py makemigrations --check --no-input --dry-run
 
-build: build-celery build-celery-beat build-adminlte
+build: build-celery build-celery-beat build-portal
 
 build-celery:
 	docker build . -t celery:local \
@@ -47,8 +47,8 @@ build-celery-beat:
 		--build-arg IMAGE_NAME=python \
 		--build-arg IMAGE_TAG=3.10-alpine
 
-build-adminlte:
-	docker build . -t adminlte:local \
+build-portal:
+	docker build . -t portal:local \
 		-f Dockerfiles/adminlte.Dockerfile \
 		--build-arg IMAGE_NAME=python \
 		--build-arg IMAGE_TAG=3.10-alpine \

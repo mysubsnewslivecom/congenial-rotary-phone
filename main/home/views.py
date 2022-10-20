@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import TemplateView
+
 from main.home.forms import CustomUserAuthenticationForm
 
 
@@ -33,7 +34,6 @@ class HomeView(LoginRequiredMixin, TemplateView):
         context["international_space_station"] = "-26.9884, -38.6396"
         context["temperature"] = "-26.9884"
         return context
-
 
 
 class UserLogout(LogoutView):
