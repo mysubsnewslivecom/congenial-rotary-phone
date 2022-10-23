@@ -15,5 +15,4 @@ urlpatterns = [
         view=views.GitProjectDetail.as_view(),
         name="git_detail_view",
     ),
-
 ]

@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 
-
 from main.gitsvn.models import ProjectDetail
 
 
@@ -17,7 +16,6 @@ class GitHomeView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["query_set"] = self.get_queryset()
         return context
-
 
 
 class GitProjectDetail(LoginRequiredMixin, DetailView):

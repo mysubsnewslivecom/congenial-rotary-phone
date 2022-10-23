@@ -38,7 +38,7 @@ class ProjectDetail(PrimaryIdMixin, TimestampMixin, ActiveStatusMixin):
 
     def get_absolute_url(self):
         # return reverse("git:git_detail_view", kwargs={"id": str(self.id)})
-        return reverse("git:git_detail_view", args=[self.id] )
+        return reverse("git:git_detail_view", args=[self.id])
 
     def as_dict(self):
         return {

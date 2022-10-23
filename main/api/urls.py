@@ -12,9 +12,7 @@ app_name = "api"
 router = routers.DefaultRouter()
 # router.register(r"temperature", views.OpenWeatherAPI, basename="get-temperature")
 
-router.register(
-    r"project", viewset=views_gitsvn.ProjectDetailAPI, basename="project"
-)
+router.register(r"project", viewset=views_gitsvn.ProjectDetailAPI, basename="project")
 
 urlpatterns = [
     path("", include(router.urls)),
