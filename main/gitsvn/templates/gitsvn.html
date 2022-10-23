@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Git{% endblock title %}
+{% block title %}Projects{% endblock title %}
 
 {% block css %}
 
@@ -9,9 +9,10 @@
 
 {% endblock css %}
 
-{% block headers %}Git{% endblock headers %}
+{% block headers %}Projects{% endblock headers %}
 
-{% block headerbuttons %}{% endblock headerbuttons %}
+{% block headerbuttons %}
+{% endblock headerbuttons %}
 
 {% block content %}
 
@@ -21,7 +22,7 @@
 
     <div class="row">
       <div class="col-lg-2 col-auto">
-        {{ query.name }}
+       <li> <a href="{{ query.get_absolute_url }}" target="_blank">{{ query.name|capfirst }}</a> </li>
       </div>
     </div>
 

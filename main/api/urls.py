@@ -13,7 +13,7 @@ router = routers.DefaultRouter()
 # router.register(r"temperature", views.OpenWeatherAPI, basename="get-temperature")
 
 router.register(
-    r"project-detail", viewset=views_gitsvn.ProjectDetailAPI, basename="project-detail"
+    r"project", viewset=views_gitsvn.ProjectDetailAPI, basename="project"
 )
 
 urlpatterns = [

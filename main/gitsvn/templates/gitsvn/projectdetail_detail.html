@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Project Details: {{ object.name }}{% endblock title %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'dist/css/pages/gitsvn/gitsvn.css' %}">
+
+{% endblock css %}
+
+{% block headers %} Project Details{% endblock headers %}
+
+{% block headerbuttons %}
+  <a href="{% url 'git:git_list_view' %}" class="text-decoration-none rounded"> Back</a>
+{% endblock headerbuttons %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="row mb-3 border">
+      <label for="name" class="col-sm-2 col-form-label">Name: </label>
+      <div class="col-sm-6 col-form-label">
+        <h6>{{ object.name }}</h6>
+      </div>
+    </div>
+
+    <div class="row mb-3 border">
+      <label for="name" class="col-sm-2 col-form-label">Project Id: </label>
+      <div class="col-sm-6 col-form-label ">
+        <h6>{{ object.project_id }}</h6>
+      </div>
+    </div>
+
+    <div class="row mb-3 border">
+      <label for="name" class="col-sm-2 col-form-label">URL: </label>
+      <div class="col-sm-6 col-form-label">
+        <h6><a href="{{ object.url }}" target="_blank">{{ object.name }}</a></h6>
+      </div>
+    </div>
+
+    <div class="row mb-3 border">
+      <label for="name" class="col-sm-2 col-form-label">GIT Source: </label>
+      <div class="col-sm-6 col-form-label">
+        <h6>{{ object.git }}</h6>
+      </div>
+    </div>
+
+    <div class="row mb-3 border">
+      <label for="name" class="col-sm-2 col-form-label">Default Branch: </label>
+      <div class="col-sm-6 col-form-label">
+        <h6>{{ object.default_branch }}</h6>
+      </div>
+    </div>
+
+    <div class="row mb-3 border">
+      <label for="name" class="col-sm-2 col-form-label">Namespace: </label>
+      <div class="col-sm-6 col-form-label">
+        <h6>{{ object.namespace }}</h6>
+      </div>
+    </div>
+
+    <div class="row mb-3 border">
+      <label for="name" class="col-sm-2 col-form-label">Ssh url to repo: </label>
+      <div class="col-sm-6 col-form-label">
+        <h6>{{ object.ssh_url_to_repo }}</h6>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock content %}
+
+{% block js %}
+
+<script src="{% static 'dist/js/pages/gitsvn/gitsvn.js' %}" type="application/javascript"></script>
+
+{% endblock js %}

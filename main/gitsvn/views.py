@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
+from django.views.generic.detail import DetailView
+
 
 from main.gitsvn.models import ProjectDetail
 
@@ -18,3 +20,5 @@ class GitHomeView(LoginRequiredMixin, TemplateView):
 
 
 
+class GitProjectDetail(LoginRequiredMixin, DetailView):
+    model = ProjectDetail
