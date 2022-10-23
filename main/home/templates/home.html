@@ -68,6 +68,11 @@
 
 {% block js %}
 
-<script src="{% static 'dist/js/pages/home/home.js' %}" type="application/javascript"></script>
+<script type=text/javascript>
+  var BASE_API_IP = "{% url 'api:ipify_list_view' %}"
+
+</script>
+
+<script src="{% static 'dist/js/pages/home/home.js' %}" type="application/javascript" defer></script>
 
 {% endblock js %}

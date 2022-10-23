@@ -1,3 +1,4 @@
+import json
 import sys
 from os import getenv
 from typing import Optional
@@ -69,5 +70,25 @@ class OpenWeather:
         )
 
         resp = request(url=OPEN_WEATHER_URL, method="GET")
-
         return resp.json()
+
+
+class Ipify:
+    def __init__(
+        self,
+        url: Optional[str] = getenv("IPIFY_BASEURL"),
+        **kwargs,
+    ):
+        super().__init__()
+        self.url = url
+        assert self.url, "IPIFY_BASEURL is not provided"
+
+    def get_ipify(self):
+
+        resp = request(method="GET", url=str(self.url))
+        if resp.status_code == 200:
+            return resp.json()
+        else:
+            return json.dumps(
+                {"statuscode": resp.status_code, "statusmessage": resp.text}, indent=4
+            )

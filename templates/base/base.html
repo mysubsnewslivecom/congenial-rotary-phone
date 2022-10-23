@@ -193,10 +193,12 @@ main {
   {% include 'base/headers.html' %}
 
   <div class="container-fluid">
-    <div class="row">
-      {% include 'base/navbar.html' %}
 
+    <div class="row">
+      {% include 'base/logging.html' %}
+      {% include 'base/navbar.html' %}
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2 text-secondary">{% block headers %}{% endblock headers %}</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
@@ -206,6 +208,7 @@ main {
         {% block content %}{% endblock content %}
       </main>
     </div>
+
   </div>
 
   {% include 'base/js.html' %}
@@ -213,19 +216,19 @@ main {
   {% block js %}{% endblock js %}
 
   <script>
-    var ul = document.querySelector("header>.container>div>ul");
-    ul.addEventListener('click', (e) => {
-      const et = e.target;
-      e.preventDefault();
-      const active = document.querySelector(".link-secondary");
-      if (active) {
-        active.classList.remove("link-secondary");
-        active.classList.add("link-dark");
-      }
-      // add active class to the clicked element
-      et.classList.remove("link-dark");
-      et.classList.add("link-secondary");
-    })
+    // var ul = document.querySelector("header>.container>div>ul");
+    // ul.addEventListener('click', (e) => {
+    //   const et = e.target;
+    //   e.preventDefault();
+    //   const active = document.querySelector(".link-secondary");
+    //   if (active) {
+    //     active.classList.remove("link-secondary");
+    //     active.classList.add("link-dark");
+    //   }
+    //   // add active class to the clicked element
+    //   et.classList.remove("link-dark");
+    //   et.classList.add("link-secondary");
+    // })
   </script>
 </body>
 

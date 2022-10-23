@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from main.gitsvn.models import ProjectDetail
+
 
 class OpenWeatherSerializer(serializers.Serializer):
     main = serializers.JSONField()
@@ -9,3 +11,21 @@ class OpenWeatherSerializer(serializers.Serializer):
     cod = serializers.IntegerField()
     coord = serializers.JSONField()
     wind = serializers.JSONField()
+
+
+class IpifySerializer(serializers.Serializer):
+    ip = serializers.JSONField()
+
+
+class ProjectDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectDetail
+        fields = (
+            "name",
+            "project_id",
+            "url",
+            "git",
+            "namespace",
+            "default_branch",
+            "ssh_url_to_repo",
+        )

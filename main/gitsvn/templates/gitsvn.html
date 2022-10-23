@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Git{% endblock title %}
+
+{% block css %}
+
+  <link rel="stylesheet" href="{% static 'dist/css/pages/gitsvn/gitsvn.css' %}">
+
+{% endblock css %}
+
+{% block headers %}Git{% endblock headers %}
+
+{% block headerbuttons %}{% endblock headerbuttons %}
+
+{% block content %}
+
+<div class="row">
+  {% for query in query_set %}
+
+    <div class="row">
+      <div class="col-lg-2 col-auto">
+        {{ query.name }}
+      </div>
+      <div class="col-lg-2 col-auto">
+        {{ query.project_id }}
+      </div>
+    <!--
+      <div class="col-lg-2 col-auto">
+        {% comment %} {{ query.url }} {% endcomment %}
+      </div>
+    -->
+      <div class="col-lg-2 col-auto">
+        {{ query.git }}
+      </div>
+    <!--
+      <div class="col-lg-2 col-auto">
+        {{ query.namespace }}
+      </div>
+    -->
+      <div class="col-lg-2 col-auto">
+        {{ query.default_branch }}
+      </div>
+    <!--
+      <div class="col-lg-2 col-auto">
+      {% comment %} {{ query.ssh_url_to_repo }} {% endcomment %}
+      </div>
+    -->
+    </div>
+
+  {% endfor %}
+
+</div>
+{% endblock content %}
+
+{% block js %}
+
+  <script src="{% static 'dist/js/pages/gitsvn/gitsvn.js' %}" type="application/javascript"></script>
+
+{% endblock js %}

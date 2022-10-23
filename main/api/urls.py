@@ -4,13 +4,17 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 # from django.conf.urls import url
 from rest_framework import routers
 
-from main.api import views
+from main.api import views, views_gitsvn, views_home
 
 app_name = "api"
 
 # newly registered ViewSet
 router = routers.DefaultRouter()
 # router.register(r"temperature", views.OpenWeatherAPI, basename="get-temperature")
+
+router.register(
+    r"project-detail", viewset=views_gitsvn.ProjectDetailAPI, basename="project-detail"
+)
 
 urlpatterns = [
     path("", include(router.urls)),
@@ -28,5 +32,10 @@ urlpatterns = [
         route="weather",
         view=views.OpenWeatherAPI.as_view(),
         name="openweather_list_view",
+    ),
+    path(
+        route="ip",
+        view=views_home.IpifyAPI.as_view(),
+        name="ipify_list_view",
     ),
 ]
