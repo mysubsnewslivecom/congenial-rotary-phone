@@ -15,3 +15,6 @@ class GitHomeView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["query_set"] = self.get_queryset()
         return context
+
+
+
