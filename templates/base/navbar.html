@@ -1,52 +1,42 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home:home_list_view' %}">Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="position-sticky pt-3 sidebar-sticky">
-    <!-- <div class="flex-shrink-0 p-3 bg-white " style="width: 280px;"> -->
-    <!-- a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-5 fw-semibold">Collapsible</span>
-    </a -->
-    {% if user.is_authenticated %}
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">Home</button>
-        <div class="collapse" id="home-collapse">
-
-        <!-- <div class="collapse show" id="home-collapse"> -->
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{% url 'home:home_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded">Dashboard</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-house"></i> Home</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:home_list_view' %}"><i class="bi bi-journals"></i> Dashboard</a></li>
           </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#git-collapse" aria-expanded="false">Git</button>
-        <div class="collapse" id="git-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{% url 'git:git_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Home</a></li>
-            <li><a href="{% url 'git:git_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Branch</a></li>
-            <li><a href="{% url 'git:git_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Merge</a></li>
-          </ul>
-        </div>
-      </li>
+        </li>
 
-      <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">Account</button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{% url 'admin:index' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Admin</a></li>
-            <li><a href="#" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Profile</a></li>
-            <li><a href="#" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Settings</a></li>
-            <li><a href="{% url 'logout' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Sign out</a></li>
-            {% else %}
-            <li><a href="#" class="link-dark text-info d-inline-flex text-decoration-none rounded"><i class="fa-regular fa-user"></i> Login</a></li>
-            {% endif %}
+        <li class="nav-item dropdown text-decoration-none">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey"><i class="fa-brands fa-git"></i> Git</a>
+          <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'git:git_list_view' %}"><i class="fa-brands fa-git"></i> Projects</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> TBD</a></li>
           </ul>
-        </div>
+        </li>
+
+      </ul>
+
+      <li class="d-flex nav-item dropdown text-decoration-none">
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey">Account</a>
+        <ul class="dropdown-menu dropdown-menu-end mx-0 shadow w-220px">
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'admin:index' %}"><i class="fa-solid fa-user-doctor"></i> Admin</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
       </li>
 
-    </ul>
+    </div>
+
   </div>
-
 </nav>
