@@ -1,7 +1,12 @@
 <div class="col-lg-auto col-auto">
   <div class="small-box bg-dark text-white">
     <div class="inner">
-      <h3 class="p-2" id="idCurrentTemperature">{{ temperature|default:'0' }}</h3>
+      <div class="flex">
+        <img src="https://openweathermap.org/img/wn/04n.png" alt="" class="weatherIcon" />
+        <div class="description">-</div>
+      </div>
+      <h3 class="weatherTemp"> - </h3>
+      <h3 class="weatherCity"> -</h3>
     </div>
     <p class="small-box-footer">Current Temperature</p>
   </div>
