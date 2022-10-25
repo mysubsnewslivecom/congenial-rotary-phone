@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from main.home.models import ActiveStatusMixin, PrimaryIdMixin, TimestampMixin
+from main.utility.mixins import ActiveStatusMixin, PrimaryIdMixin, TimestampMixin
 
 
 class ProjectDetail(PrimaryIdMixin, TimestampMixin, ActiveStatusMixin):
