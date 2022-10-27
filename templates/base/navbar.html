@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home:home_list_view' %}">Portal</a>
+    {% comment %} <a class="navbar-brand" href="{% url 'home:home_list_view' %}">
+      <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      ...</a> {% endcomment %}
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,7 +27,17 @@
           </ul>
         </li>
 
+        <li class="nav-item dropdown text-decoration-none">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey"><i class="fa-solid fa-heart-pulse"></i> Health</a>
+          <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i class="fa-solid fa-heart-pulse"></i> Health</a></li>
+          </ul>
+        </li>
+
+
       </ul>
+      <a class="nav-item text-bg-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+        <i class="bi bi-list"></i></a>
 
       <li class="d-flex nav-item dropdown text-decoration-none">
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey">Account</a>

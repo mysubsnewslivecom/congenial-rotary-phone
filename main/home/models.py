@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone as tz
 
+from main.utility.mixins import PrimaryIdMixin, TimestampMixin, UUIDMixin
+
 
 class User(AbstractUser):
 
@@ -24,4 +26,12 @@ class User(AbstractUser):
         default=tz.now,
         verbose_name="Blog updated on",
         help_text="Updated Timestamp",
+    )
+
+
+class Audit(PrimaryIdMixin, TimestampMixin, UUIDMixin):
+    message = models.CharField(
+        max_length=1000,
+        verbose_name="Message",
+        help_text="message",
     )

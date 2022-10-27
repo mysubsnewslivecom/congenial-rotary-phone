@@ -92,3 +92,13 @@ class Ipify:
             return json.dumps(
                 {"statuscode": resp.status_code, "statusmessage": resp.text}, indent=4
             )
+
+
+class AuditMixins:
+    def __init__(self) -> None:
+        pass
+
+    def dispatch(self, request, *args, **kwargs):
+        dispatch = super().dispatch(request, *args, **kwargs)
+        logger.info("dispatch")
+        return dispatch

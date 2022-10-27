@@ -1,52 +1,18 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse">
-
-  <div class="position-sticky pt-3 sidebar-sticky">
-    <!-- <div class="flex-shrink-0 p-3 bg-white " style="width: 280px;"> -->
-    <!-- a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-5 fw-semibold">Collapsible</span>
-    </a -->
-    {% if user.is_authenticated %}
-
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">Home</button>
-        <div class="collapse" id="home-collapse">
-
-        <!-- <div class="collapse show" id="home-collapse"> -->
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{% url 'home:home_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded">Dashboard</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#git-collapse" aria-expanded="false">Git</button>
-        <div class="collapse" id="git-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{% url 'git:git_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Home</a></li>
-            <li><a href="{% url 'git:git_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Branch</a></li>
-            <li><a href="{% url 'git:git_list_view' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Merge</a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">Account</button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="{% url 'admin:index' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Admin</a></li>
-            <li><a href="#" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Profile</a></li>
-            <li><a href="#" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Settings</a></li>
-            <li><a href="{% url 'logout' %}" class="link-dark text-info d-inline-flex text-decoration-none rounded"> Sign out</a></li>
-            {% else %}
-            <li><a href="#" class="link-dark text-info d-inline-flex text-decoration-none rounded"><i class="fa-regular fa-user"></i> Login</a></li>
-            {% endif %}
-          </ul>
-        </div>
-      </li>
-
-    </ul>
+<div class="offcanvas offcanvas-end bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Portal</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+<hr>
+  <div class="offcanvas-body">
 
-</nav>
+    <ul>
+      <li>Hello, World</li>
+      <li>Hello, World</li>
+      <li>Hello, World</li>
+      <li>Hello, World</li>
+      <li>Hello, World</li>
+    </ul>
+
+  </div>
+</div>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Health{% endblock title %}
+
+{% block css %}
+<style>
+
+  textarea {
+    {% comment %} width: 40% !important;
+    height: 20% !important; {% endcomment %}
+    height: 5em;
+    width: 20em;
+    margin: 5px 0;
+    padding: 1%;
+    /* width: 100%;
+    margin: 0;
+    padding: 0; */
+    border-width: 0;
+    background-color: darkgrey !important;
+  }
+
+</style>
+
+{% endblock css %}
+
+{% block headers %}Health{% endblock headers %}
+
+{% block headerbuttons %}{% endblock headerbuttons %}
+
+{% block content %}
+
+  {% comment %} {% include 'health/rule_form.html' with form=form %} {% endcomment %}
+
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}

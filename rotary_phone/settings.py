@@ -47,6 +47,7 @@ LOCAL_APPS = [
     "main.home.apps.HomeConfig",
     "main.api.apps.ApiConfig",
     "main.gitsvn.apps.GitsvnConfig",
+    "main.health.apps.HealthConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
