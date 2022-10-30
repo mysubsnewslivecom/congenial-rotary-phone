@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from main.gitsvn.models import ProjectDetail
+from main.health.models import Rule
 
 
 class OpenWeatherSerializer(serializers.Serializer):
@@ -28,4 +29,13 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
             "namespace",
             "default_branch",
             "ssh_url_to_repo",
+        )
+
+
+class RulesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rule
+        fields = (
+            "name",
+            "is_active"
         )

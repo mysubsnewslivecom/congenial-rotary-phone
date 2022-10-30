@@ -4,6 +4,7 @@ from main.home.models import User
 import datetime
 from main.utility.functions import LoggingService
 from django.conf import settings
+from django.core.management.base import BaseCommand
 
 
 log = LoggingService()
@@ -31,14 +32,18 @@ class GenerateJwt:
         log.info(token)
 
 
-def generate_jwt(username: str):
-    user = User.objects.get(username=username)
-    payload = {
-        "name": user.get_full_name(),
-        "username": user.username,
-        "email": user.email,
-        "exp": round(datetime.datetime.now().timestamp() + 24 * 60 * 60),
-        "iss": "Portal",
-        "iat": round(datetime.datetime.now().timestamp()),
-    }
-    log.info(payload)
+# def generate_jwt(username: str):
+#     user = User.objects.get(username=username)
+#     payload = {
+#         "name": user.get_full_name(),
+#         "username": user.username,
+#         "email": user.email,
+#         "exp": round(datetime.datetime.now().timestamp() + 24 * 60 * 60),
+#         "iss": "Portal",
+#         "iat": round(datetime.datetime.now().timestamp()),
+#     }
+#     log.info(payload)
+
+class Command(BaseCommand):
+    def handle(self, *args, **options):
+        GenerateJwt().generate_jwt(username="admin")

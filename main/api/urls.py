@@ -4,7 +4,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 # from django.conf.urls import url
 from rest_framework import routers
 
-from main.api import views, views_gitsvn, views_home
+from main.api import views, views_gitsvn, views_home, views_health
 
 app_name = "api"
 
@@ -13,6 +13,7 @@ router = routers.DefaultRouter()
 # router.register(r"temperature", views.OpenWeatherAPI, basename="get-temperature")
 
 router.register(r"project", viewset=views_gitsvn.ProjectDetailAPI, basename="project")
+router.register(r"health/rule", viewset=views_health.RuleAPI, basename="rule")
 
 urlpatterns = [
     path("", include(router.urls)),
