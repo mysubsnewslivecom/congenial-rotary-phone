@@ -217,6 +217,14 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = path.join(BASE_DIR, "media")
+
+FILE_DIR = path.join(BASE_DIR, "files")
+DATA_DIR = path.join(BASE_DIR, "data")
+BACKUP_DIR = path.join(getenv("BACKUP_DIR", DATA_DIR), "backup")
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

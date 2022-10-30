@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone as tz
+from django.utils.translation import gettext_lazy as _
 
 from main.utility.mixins import PrimaryIdMixin, TimestampMixin, UUIDMixin
 
@@ -27,6 +28,12 @@ class User(AbstractUser):
         verbose_name="Blog updated on",
         help_text="Updated Timestamp",
     )
+    address = models.CharField(max_length=300, null=True)
+    address_2 = models.CharField(max_length=300, null=True)
+    city = models.CharField(max_length=300, null=True)
+    state = models.CharField(max_length=300, null=True)
+    country = models.CharField(max_length=300, null=True)
+    zip = models.CharField(max_length=300, null=True)
 
 
 class Audit(PrimaryIdMixin, TimestampMixin, UUIDMixin):

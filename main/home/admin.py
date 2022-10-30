@@ -135,6 +135,16 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         (
+            "Contact Info",
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    ("address", "address_2"),
+                    "city", "country", "state", "zip",
+                ),
+            },
+        ),
+        (
             "Important Dates",
             {"classes": ("collapse",), "fields": (("date_joined", "last_modified"),)},
         ),

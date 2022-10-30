@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}{{ block.super }} - Profile{% endblock title %}
+
+{% block css %}
+
+<style>
+  .list-group {
+    max-width: 460px;
+    margin: 4rem auto;
+  }
+
+  .form-check-input:checked+.form-checked-content {
+    opacity: .5;
+  }
+
+  .form-check-input-placeholder {
+    border-style: dashed;
+  }
+
+  [contenteditable]:focus {
+    outline: 0;
+  }
+
+  .list-group-checkable .list-group-item {
+    cursor: pointer;
+  }
+
+  .list-group-item-check {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .list-group-item-check:hover+.list-group-item {
+    background-color: var(--bs-light);
+  }
+
+  .list-group-item-check:checked+.list-group-item {
+    color: #fff;
+    background-color: var(--bs-blue);
+  }
+
+  .list-group-item-check[disabled]+.list-group-item,
+  .list-group-item-check:disabled+.list-group-item {
+    pointer-events: none;
+    filter: none;
+    opacity: .5;
+  }
+
+  .list-group-radio .list-group-item {
+    cursor: pointer;
+    border-radius: .5rem;
+  }
+
+  .list-group-radio .form-check-input {
+    z-index: 2;
+    margin-top: -.5em;
+  }
+
+  .list-group-radio .list-group-item:hover,
+  .list-group-radio .list-group-item:focus {
+    background-color: var(--bs-light);
+  }
+
+  .list-group-radio .form-check-input:checked+.list-group-item {
+    background-color: var(--bs-body);
+    border-color: var(--bs-blue);
+    box-shadow: 0 0 0 2px var(--bs-blue);
+  }
+
+  .list-group-radio .form-check-input[disabled]+.list-group-item,
+  .list-group-radio .form-check-input:disabled+.list-group-item {
+    pointer-events: none;
+    filter: none;
+    opacity: .5;
+  }
+</style>
+
+
+{% endblock css %}
+
+{% block headers %}Profile{% endblock headers %}
+
+{% block headerbuttons %}{% endblock headerbuttons %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-3">
+
+    <!-- Profile Image -->
+    <div class="card card-primary card-outline text-dark">
+      <div class="card-body box-profile">
+        <div class="text-center">
+          <img class="profile-user-img img-fluid img-circle" src="{{ request.user.profile_picture.url }}"
+            alt="User profile picture">
+        </div>
+
+        <h3 class="profile-username text-center">{{ user.get_full_name | safe | capfirst }}</h3>
+
+        <p class="text-muted text-center">Software Engineer</p>
+
+        <ul class="list-group w-auto">
+          <li class="list-group-item">
+            <b>Followers</b> <a class="float-right">{{ user.followers }}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Following</b> <a class="float-right">{{ user.following }}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Friends</b> <a class="float-right">{{ user.friends }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- About Me Box -->
+    <div class="card card-primary card-outline text-dark">
+      <div class="card-header">
+        <h3 class="card-title">About Me</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+        <p class="text-muted">
+          B.S. in Computer Science from the University of Tennessee at Knoxville
+        </p>
+
+        <hr>
+
+        <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+        <p class="text-muted">Malibu, California</p>
+
+        <hr>
+
+        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+        <p class="text-muted">
+          <span class="tag tag-danger">UI Design</span>
+          <span class="tag tag-success">Coding</span>
+          <span class="tag tag-info">Javascript</span>
+          <span class="tag tag-warning">PHP</span>
+          <span class="tag tag-primary">Node.js</span>
+        </p>
+
+        <hr>
+
+        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim
+          neque.</p>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <div class="card card-primary card-outline text-dark">
+      <div class="card-header p-2">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+            <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+              type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+              type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+            <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled"
+              type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
+            <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+              type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+          </div>
+        </nav>
+      </div>
+      <div class="card-body">
+        <div class="tab-content text-dark" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+
+            <form class="form-horizontal">
+
+              <div class="row mb-3">
+                <label for="inputName" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName" placeholder="{{ user.username| safe| lower }}"
+                    readonly>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName"
+                    placeholder="{{ user.get_full_name| safe| capfirst }}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputEmail" placeholder="{{ user.email| safe| lower }}"
+                    readonly>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputName2" class="col-sm-2 col-form-label">Is Superuser</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName2" placeholder="{{ user.is_superuser| safe }}"
+                    readonly>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="lastLogin" class="col-sm-2 col-form-label">Last Login</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName2"
+                    placeholder="{{ user.last_login| naturaltime }}" readonly>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="dateJoined" class="col-sm-2 col-form-label">Date joined</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName2"
+                    placeholder="{{ user.date_joined| naturaltime }}" readonly>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputSkills" class="col-sm-2 col-form-label">User Groups</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputSkills" placeholder="{{ user.groups }}">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="offset-sm-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="offset-sm-2 col-sm-10">
+                  <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="{{ user.address| safe }}">
+              </div>
+              <div class="col-12">
+                <label for="inputAddress2" class="form-label">Address 2</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="{{ user.address_2| safe }}">
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="{{ user.city| safe }}">
+              </div>
+              <div class="col-md-4">
+                <label for="inputCity" class="form-label">State</label>
+                <input type="text" class="form-control" id="inputState" placeholder="{{ user.state| safe }}">
+              </div>
+              <div class="col-md-4">
+                <label for="inputCountry" class="form-label">Country</label>
+                <input type="text" class="form-control" id="inputCountry" placeholder="{{ user.country| safe }}">
+              </div>
+              <div class="col-md-4">
+                <label for="inputZip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="inputZip" placeholder="{{ user.zip| safe }}">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+          </div>
+          <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+            tabindex="0">
+            Home
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+
+<script src="{% static 'dist/js/pages/home/profile.js' %}" type="application/javascript" defer></script>
+
+{% endblock js %}

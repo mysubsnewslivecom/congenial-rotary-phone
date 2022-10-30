@@ -38,3 +38,6 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
 class UserLogout(LogoutView):
     next_page = settings.LOGOUT_REDIRECT_URL
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = "profile.html"

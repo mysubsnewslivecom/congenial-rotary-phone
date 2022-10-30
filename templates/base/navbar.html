@@ -43,6 +43,8 @@
         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey">{{request.user.get_full_name}}</a>
         <ul class="dropdown-menu dropdown-menu-end mx-0 shadow w-220px">
           <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'admin:index' %}"><i class="fa-solid fa-user-doctor"></i> Admin</a></li>
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'api:swagger-ui' %}"><i class="fa-solid fa-tape"></i> Api</a></li>
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:profile_list_view' %}"><i class="bi bi-person"></i> Profile</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
         </ul>

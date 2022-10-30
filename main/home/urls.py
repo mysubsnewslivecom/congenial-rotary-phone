@@ -11,4 +11,9 @@ urlpatterns = [
         view=views.HomeView.as_view(),
         name="home_list_view",
     ),
+    path(
+        route="profile",
+        view=views.ProfileView.as_view(),
+        name="profile_list_view",
+    ),
 ]
