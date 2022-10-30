@@ -48,8 +48,8 @@ build-celery-beat:
 		--build-arg IMAGE_TAG=3.10-alpine
 
 build-portal:
-	docker build . -t portal:local \
-		-f Dockerfiles/adminlte.Dockerfile \
+	docker build . -t rotary-phone:local \
+		-f Dockerfiles/rotaryphone.Dockerfile \
 		--build-arg IMAGE_NAME=python \
 		--build-arg IMAGE_TAG=3.10-alpine \
 		--build-arg DJANGO_PORT=9000 \

@@ -23,7 +23,7 @@ class GenerateJwt:
             "username": user.username,
             "email": user.email,
             "exp": round((datetime.datetime.now() + datetime.timedelta(1)).timestamp()),
-            "iss": "Portal",
+            "iss": "Rotary Phone",
             "iat": round(datetime.datetime.now().timestamp()),
         }
 
@@ -39,7 +39,7 @@ class GenerateJwt:
 #         "username": user.username,
 #         "email": user.email,
 #         "exp": round(datetime.datetime.now().timestamp() + 24 * 60 * 60),
-#         "iss": "Portal",
+#         "iss": "Rotary Phone",
 #         "iat": round(datetime.datetime.now().timestamp()),
 #     }
 #     log.info(payload)
