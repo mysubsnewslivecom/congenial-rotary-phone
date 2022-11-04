@@ -3,7 +3,7 @@ from django.views.generic import CreateView, TemplateView
 
 from main.health.forms import RuleForm
 from main.health.models import Rule
-
+from main.utility.mixins import JSONResponseMixin
 
 class HealthHomeView(TemplateView):
     template_name = "health.html"
@@ -21,3 +21,14 @@ class RuleCreateView(CreateView):
     form_class = RuleForm
     success_url = reverse_lazy("health:health_list_view")
     success_message = "Rule added!"
+
+
+from django.views.generic import TemplateView
+import json
+class JSONView(JSONResponseMixin, TemplateView):
+    def render_to_response(self, context, **response_kwargs):
+        context = dict()
+        # rules = list(Rule.objects.values("name","id", "is_active",))
+        rules = list(Rule.objects.values())
+        context["rules"] = rules
+        return self.render_to_json_response(context, **response_kwargs)

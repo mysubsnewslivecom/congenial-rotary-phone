@@ -1,11 +1,11 @@
-import jwt
-import subprocess
-from main.home.models import User
 import datetime
-from main.utility.functions import LoggingService
+
+import jwt
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+from main.home.models import User
+from main.utility.functions import LoggingService
 
 log = LoggingService()
 
@@ -43,6 +43,7 @@ class GenerateJwt:
 #         "iat": round(datetime.datetime.now().timestamp()),
 #     }
 #     log.info(payload)
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):

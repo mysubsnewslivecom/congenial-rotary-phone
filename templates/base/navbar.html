@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
   <div class="container-fluid">
     {% comment %} <a class="navbar-brand" href="{% url 'home:home_list_view' %}">
-      <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24"
+        class="d-inline-block align-text-top">
       ...</a> {% endcomment %}
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,41 +13,88 @@
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-house"></i> Home</a>
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i
+              class="fa-solid fa-house"></i> Home</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:home_list_view' %}"><i class="bi bi-journals"></i> Dashboard</a></li>
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:home_list_view' %}"><i
+                  class="bi bi-journals"></i> Dashboard</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown text-decoration-none">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey"><i class="fa-brands fa-git"></i> Git</a>
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            style="color: darkgrey"><i class="fa-brands fa-git"></i> Git</a>
           <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
-            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'git:git_list_view' %}"><i class="fa-brands fa-git"></i> Projects</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> TBD</a></li>
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'git:git_list_view' %}"><i
+                  class="fa-brands fa-git"></i> Projects</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}"><i
+                  class="bi bi-box-arrow-right"></i> TBD</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown text-decoration-none">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey"><i class="fa-solid fa-heart-pulse"></i> Health</a>
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            style="color: darkgrey"><i class="fa-solid fa-heart-pulse"></i> Health</a>
           <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
-            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i class="fa-solid fa-heart-pulse"></i> Health</a></li>
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i
+                  class="fa-solid fa-heart-pulse"></i> Health</a></li>
           </ul>
         </li>
 
+        <li class="nav-item dropdown text-decoration-none">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            style="color: darkgrey"><i class="nav-icon fas fa-archway"></i> System</a>
+          <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i
+                  class="fa-solid fa-heart-pulse"></i> Health</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown text-decoration-none">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            style="color: darkgrey"><i class="nav-icon fas fa-archway"></i> Pages</a>
+          <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i
+                  class="bi bi-file-post"></i> Todo</a></li>
+
+            <li class="dropstart">
+              <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">Submenu Left</a>
+              <ul class="dropdown-menu dropdown-menu-left mx-0 shadow w-220px">
+                <li><a class="dropdown-item" href=""> Third level 1</a></li>
+                <li><a class="dropdown-item" href=""> Third level 2</a></li>
+                <li><a class="dropdown-item" href=""> Third level 3</a></li>
+                <li><a class="dropdown-item" href=""> Third level 4</a></li>
+                <li><a class="dropdown-item" href=""> Third level 5</a></li>
+              </ul>
+            </li>
+
+
+          </ul>
+        </li>
 
       </ul>
-      <a class="nav-item text-bg-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+      <a class="nav-item text-bg-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+        aria-controls="offcanvasWithBothOptions">
         <i class="bi bi-list"></i></a>
 
       <li class="d-flex nav-item dropdown text-decoration-none">
-        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" style="color: darkgrey">{{request.user.get_full_name}}</a>
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+          style="color: darkgrey">{{request.user.get_full_name}}</a>
         <ul class="dropdown-menu dropdown-menu-end mx-0 shadow w-220px">
-          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'admin:index' %}"><i class="fa-solid fa-user-doctor"></i> Admin</a></li>
-          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'api:swagger-ui' %}"><i class="fa-solid fa-tape"></i> Api</a></li>
-          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:profile_list_view' %}"><i class="bi bi-person"></i> Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'admin:index' %}"><i
+                class="fa-solid fa-user-doctor"></i> Admin</a></li>
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'api:swagger-ui' %}"><i
+                class="fa-solid fa-tape"></i> Api</a></li>
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:profile_list_view' %}"><i
+                class="bi bi-person"></i> Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'logout' %}"><i
+                class="bi bi-box-arrow-right"></i> Logout</a></li>
         </ul>
       </li>
 

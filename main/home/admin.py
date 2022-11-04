@@ -140,7 +140,10 @@ class UserAdmin(BaseUserAdmin):
                 "classes": ("collapse",),
                 "fields": (
                     ("address", "address_2"),
-                    "city", "country", "state", "zip",
+                    "city",
+                    "country",
+                    "state",
+                    "zip",
                 ),
             },
         ),

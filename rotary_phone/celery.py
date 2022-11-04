@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from os import environ
 
 from celery import Celery
+
 environ.setdefault("DJANGO_SETTINGS_MODULE", "rotary_phone.settings")
 app = Celery(main="rotary_phone")
 

@@ -13,6 +13,7 @@ class RuleForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+        self.fields["name"].required = True
         self.helper = FormHelper()
         self.helper.attrs = {"novalidate": ""}
         self.helper.form_id = "idRuleForm"

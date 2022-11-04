@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from main.gitsvn.models import ProjectDetail
-from main.health.models import Rule
+from main.health.models import Rule, DailyTracker
 
 
 class OpenWeatherSerializer(serializers.Serializer):
@@ -35,7 +35,12 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
 class RulesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rule
-        fields = (
-            "name",
-            "is_active"
-        )
+        fields = ("name", "is_active")
+
+
+class DailyTrackerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DailyTracker
+        fields = "__all__"
+        lookup_field = "date"
+

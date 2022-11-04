@@ -1,6 +1,6 @@
-from main.utility.functions import LoggingService
 from django.conf import settings
 
+from main.utility.functions import LoggingService
 
 log = LoggingService()
 

@@ -15,17 +15,17 @@
     transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
     /* padding: 14px 80px 18px 36px; */
     cursor: pointer;
-    width: 10rem;
-    height: 10rem;
+    /* width: 10rem; */
+    /* height: 10rem; */
     margin: 0.5rem;
   }
 
-  .card:hover {
+  /* .card:hover {
     transform: translateY(-20px);
     transition: 0.1s ease-out;
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
-  }
+  } */
 </style>
 
 <link rel="stylesheet" href="{% static 'dist/css/pages/home/home.css' %}">
@@ -44,7 +44,7 @@
 
   {% include 'dashboard/widgets/pending_review.html' with pending_reviewopen_tasksunread_articles=pending_review %}
 
-  {% include 'dashboard/widgets/open_tasks.html' with open_tasksunread_articles=open_tasksunread_articles %}
+  {% include 'dashboard/widgets/open_rules.html' with open_tasksunread_articles=open_tasksunread_articles %}
 
   {% include 'dashboard/widgets/unread_articles.html' with unread_articles=unread_articles %}
 
@@ -58,6 +58,7 @@
 
 </div>
 
+<div class="b-divider"></div>
 <div class="row">
 
   {% include 'dashboard/widgets/timer.html' %}
@@ -66,8 +67,30 @@
 <div class="b-divider"></div>
 
 <div class="row">
-  {% include 'dashboard/widgets/todo.html' %}
+  {% comment %} {% include 'dashboard/widgets/todo.html' %} {% endcomment %}
 
+</div>
+
+<div class="col-lg-4 col-12">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-12 bg-light text-right">
+          <button type="button" class="btn btn-link float-end" data-bs-toggle="collapse"
+            data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample"
+            style="text-decoration: none; border: 1px dashed #61affe; ">
+            <i class="bi bi-arrows-expand"></i>
+          </button>
+          <h3 class="float-start">Rules</h3>
+        </div>
+      </div>
+    </div>
+    <div class="collapse collapse-horizontal show" id="collapseWidthExample">
+      <div class="card-body">
+        <div id="test"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock content %}
