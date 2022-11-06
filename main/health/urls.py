@@ -16,5 +16,4 @@ urlpatterns = [
         view=views.JSONView.as_view(),
         name="rule_json_view",
     ),
-
 ]

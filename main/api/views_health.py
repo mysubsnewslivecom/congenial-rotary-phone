@@ -1,12 +1,13 @@
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from main.api import serializers
-from main.health.models import Rule, DailyTracker
 from rest_framework.decorators import action
-from main.utility.functions import LoggingService
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+
+from main.api import serializers
+from main.health.models import DailyTracker, Rule
+from main.utility.functions import LoggingService
 
 log = LoggingService()
 
@@ -28,7 +29,7 @@ class DailyActivityViewset(viewsets.ModelViewSet):
 
     # @action(detail=False, methods=['get'], url_path='gdt', name='Get daily status')
     # def get_daily_status(self, request, pk=None, *args, **kwargs):
-    @action(detail=False, url_path='gdt', methods=['get'], name='Get daily status')
+    @action(detail=False, url_path="gdt", methods=["get"], name="Get daily status")
     def get_daily_status(self, request, *args, **kwargs):
         data = DailyTracker.objects.get_daily_status()
         log.debug(f"{data = }")

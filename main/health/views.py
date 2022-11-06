@@ -1,9 +1,11 @@
+import yaml
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
 
 from main.health.forms import RuleForm
-from main.health.models import Rule
+from main.health.models import DailyTracker, Rule
 from main.utility.mixins import JSONResponseMixin
+
 
 class HealthHomeView(TemplateView):
     template_name = "health.html"
@@ -23,12 +25,17 @@ class RuleCreateView(CreateView):
     success_message = "Rule added!"
 
 
-from django.views.generic import TemplateView
-import json
 class JSONView(JSONResponseMixin, TemplateView):
     def render_to_response(self, context, **response_kwargs):
         context = dict()
         # rules = list(Rule.objects.values("name","id", "is_active",))
         rules = list(Rule.objects.values())
+        dt = list(DailyTracker.objects.values())
         context["rules"] = rules
+        context["daily_tracker"] = dt
+        print(
+            yaml.dump(
+                context,
+            )
+        )
         return self.render_to_json_response(context, **response_kwargs)

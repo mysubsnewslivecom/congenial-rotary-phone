@@ -2,8 +2,8 @@ import datetime
 
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
 from django.utils import timezone as tz
+from django.utils.translation import gettext_lazy as _
 
 from main.utility.mixins import ActiveStatusMixin, PrimaryIdMixin, TimestampMixin
 
@@ -47,8 +47,12 @@ class DailyTrackerManager(models.Manager):
 
         result = {
             "count": {"pending": pending.count(), "completed": completed.count()},
-            "pending": Rule.objects.filter(id__in=pending).values_list("name", flat=True),
-            "completed": Rule.objects.filter(id__in=completed).values_list("name", flat=True),
+            "pending": Rule.objects.filter(id__in=pending).values_list(
+                "name", flat=True
+            ),
+            "completed": Rule.objects.filter(id__in=completed).values_list(
+                "name", flat=True
+            ),
         }
         return result
 
@@ -62,7 +66,7 @@ class DailyTracker(PrimaryIdMixin, ActiveStatusMixin, TimestampMixin):
         "health.Rule",
         verbose_name=_("rule id"),
         on_delete=models.CASCADE,
-        related_name="rules"
+        related_name="rules",
     )
     status = models.BooleanField(_("Completed"))
     date = models.DateField(_("Date"), default=tz.localdate)
