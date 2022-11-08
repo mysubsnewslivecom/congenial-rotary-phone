@@ -5,13 +5,19 @@ from django.urls import reverse
 from django.utils import timezone as tz
 from django.utils.translation import gettext_lazy as _
 
+from main.utility.functions import LoggingService
 from main.utility.mixins import ActiveStatusMixin, PrimaryIdMixin, TimestampMixin
+
+log = LoggingService()
 
 
 class Rule(PrimaryIdMixin, ActiveStatusMixin, TimestampMixin):
-    name = models.JSONField(
-        help_text="Name of the rule(JSON)",
-        verbose_name="Rule Name",
+    # name = models.JSONField(
+    #     help_text="Name of the rule(JSON)",
+    #     verbose_name="Rule Name",
+    # )
+    name = models.CharField(
+        help_text="Name of the rule", verbose_name="Rule Name", max_length=300
     )
 
     class Meta:
@@ -47,13 +53,14 @@ class DailyTrackerManager(models.Manager):
 
         result = {
             "count": {"pending": pending.count(), "completed": completed.count()},
-            "pending": Rule.objects.filter(id__in=pending).values_list(
-                "name", flat=True
+            "pending": list(
+                Rule.objects.filter(id__in=pending).values_list("name", flat=True)
             ),
-            "completed": Rule.objects.filter(id__in=completed).values_list(
-                "name", flat=True
+            "completed": list(
+                Rule.objects.filter(id__in=completed).values_list("name", flat=True)
             ),
         }
+        log.info(result)
         return result
 
     # def get_daily_status(self):
@@ -78,9 +85,9 @@ class DailyTracker(PrimaryIdMixin, ActiveStatusMixin, TimestampMixin):
         unique_together = ["date", "rule_id"]
 
     def __str__(self) -> str:
-        name = str(self.rule_id.name["name"])
-        completion = "Completed" if self.status else "Pending"
-        return "| ".join([str(self.rule_id), str(self.date), name, completion])
+        name = str(self.rule_id.name)
+        completion = "[Completed]" if self.status else "[Pending]"
+        return "| ".join([str(self.date), name, completion])
 
     def get_absolute_url(self):
         # return reverse("git:git_detail_view", kwargs={"id": str(self.id)})

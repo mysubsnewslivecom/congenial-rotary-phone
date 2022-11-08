@@ -48,6 +48,7 @@ LOCAL_APPS = [
     "main.api.apps.ApiConfig",
     "main.gitsvn.apps.GitsvnConfig",
     "main.health.apps.HealthConfig",
+    "main.movflex.apps.MovflexConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -55,11 +56,13 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "rotary_phone.urls"
@@ -113,6 +116,11 @@ if not DEBUG or DB_SRC == "PG":
                 "connect_timeout": 5,
                 "options": f"-c search_path={DJANGO_SCHEMA_NAME}",
             },
+            "TEST": {
+                # "ENGINE": "django.db.backends.sqlite3",
+                # 'NAME': path.join(BASE_DIR, "db.sqlite3"),
+                "NAME": "test",  # test database name
+            },
         },
         "custom": {
             "ENGINE": DJANGO_DB_ENGINE,
@@ -124,6 +132,11 @@ if not DEBUG or DB_SRC == "PG":
             "OPTIONS": {
                 "connect_timeout": 5,
                 "options": f"-c search_path={DJANGO_CUSTOM_SCHEMA}",
+            },
+            "TEST": {
+                # "ENGINE": "django.db.backends.sqlite3",
+                # "NAME": BASE_DIR / "db.sqlite3",
+                "NAME": "test",  # test database name
             },
         },
     }

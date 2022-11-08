@@ -2,7 +2,12 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone as tz
 
-from main.utility.mixins import PrimaryIdMixin, TimestampMixin, UUIDMixin
+from main.utility.mixins import (
+    ActiveStatusMixin,
+    PrimaryIdMixin,
+    TimestampMixin,
+    UUIDMixin,
+)
 
 
 class User(AbstractUser):
@@ -41,3 +46,23 @@ class Audit(PrimaryIdMixin, TimestampMixin, UUIDMixin):
         verbose_name="Message",
         help_text="message",
     )
+
+
+class Category(PrimaryIdMixin, TimestampMixin, ActiveStatusMixin):
+    category = models.CharField(
+        max_length=250,
+        verbose_name="Category",
+        help_text="Category",
+    )
+    sub_category = models.CharField(
+        max_length=250,
+        verbose_name="Category",
+        help_text="Category",
+    )
+
+    class Meta:
+        unique_together = ["category", "sub_category"]
+        ordering = ["-id"]
+
+    def __str__(self) -> str:
+        return "|".join([str(self.category), str(self.sub_category)])

@@ -4,7 +4,10 @@ from django.views.generic import CreateView, TemplateView
 
 from main.health.forms import RuleForm
 from main.health.models import DailyTracker, Rule
+from main.utility.functions import LoggingService
 from main.utility.mixins import JSONResponseMixin
+
+log = LoggingService()
 
 
 class HealthHomeView(TemplateView):
@@ -29,11 +32,13 @@ class JSONView(JSONResponseMixin, TemplateView):
     def render_to_response(self, context, **response_kwargs):
         context = dict()
         # rules = list(Rule.objects.values("name","id", "is_active",))
-        rules = list(Rule.objects.values())
-        dt = list(DailyTracker.objects.values())
+        rules = list(Rule.objects.filter(is_active=True).values("name"))
+        # date_today = datetime.date.today()
+        dt = DailyTracker.objects.get_daily_status()
         context["rules"] = rules
         context["daily_tracker"] = dt
-        print(
+        log.info(context)
+        log.info(
             yaml.dump(
                 context,
             )

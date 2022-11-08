@@ -44,7 +44,6 @@ class Command(BaseCommand):
 #     "Learn atleast 1h",
 # ]
 
-
 # for rules in default_rules:
 #     data_dict = dict()
 #     data_dict["name"] = {"name": rules}
