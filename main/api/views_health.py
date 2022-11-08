@@ -36,19 +36,14 @@ class DailyActivityViewset(viewsets.ModelViewSet):
     # @action(detail=False, methods=['get'], url_path='gdt', name='Get daily status')
     # def get_daily_status(self, request, pk=None, *args, **kwargs):
     @action(detail=False, url_path="gdt", methods=["get"], name="Get daily status")
-
     @method_decorator(never_cache)
     # @method_decorator(cache_page(0))
     @method_decorator(vary_on_cookie)
     def get_daily_status(self, request, *args, **kwargs):
         data = DailyTracker.objects.get_daily_status()
-        # log.debug(f"{data = }")
         return Response(data=data)
 
     def retrieve(self, request, *args, **kwargs):
         date = kwargs["date"]
-        data = Rule.objects.filter(rules__date=date)
-        log.info(data)
-        # data = Rule.objects.filter(rules__date=date).values_list("name", flat=True)
-        # data = DailyTracker.objects.filter(date=date).values()
-        return Response(data.values())
+        data = Rule.objects.filter(rules__date=date).values()
+        return Response(data)
