@@ -16,6 +16,11 @@ router.register(r"project", viewset=views_gitsvn.ProjectDetailAPI, basename="pro
 router.register(r"health/rule", viewset=views_health.RuleAPI, basename="rule")
 router.register(r"health/dt", viewset=views_health.DailyActivityViewset, basename="dt")
 router.register(
+    r"health/trigger/daily",
+    viewset=views_health.TriggerHealth,
+    basename="trigger-health",
+)
+router.register(
     r"movieflex/movie", viewset=views_movieflex.MediaViewset, basename="movie"
 )
 router.register(

@@ -10,6 +10,7 @@ from rest_framework.response import Response
 
 from main.api import serializers
 from main.health.models import DailyTracker, Rule
+from main.health.tasks import trigger_actions
 from main.utility.functions import LoggingService
 
 log = LoggingService()
@@ -46,3 +47,29 @@ class DailyActivityViewset(viewsets.ModelViewSet):
         date = kwargs["date"]
         data = Rule.objects.filter(rules__date=date).values()
         return Response(data)
+
+
+class TriggerHealth(viewsets.ViewSet):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    # serializer_class = serializers.TriggerHealthSerializer
+    http_method_names = ["post"]
+
+    def create(self, request, *args, **kwargs):
+        task_id = trigger_actions.delay()
+        log.info(task_id)
+        return Response({"task_id": str(task_id), "message": "Task triggered"})
+
+    def list(self, request):
+        return Response("list")
+
+    def retrieve(self, request, pk=None):
+        pass
+
+    def update(self, request, pk=None):
+        pass
+
+    def partial_update(self, request, pk=None):
+        pass
+
+    def destroy(self, request, pk=None):
+        pass

@@ -10,8 +10,7 @@ from rotary_phone import celeryconfig
 environ.setdefault("DJANGO_SETTINGS_MODULE", "rotary_phone.settings")
 app = Celery(main="rotary_phone")
 
-# app.config_from_object("django.conf:settings", namespace="CELERY")
-app.config_from_object("django.conf:settings", namespace="celery")
+app.config_from_object("django.conf:settings", namespace="CELERY")
 app.config_from_object(celeryconfig)
 
 app.autodiscover_tasks()

@@ -1,9 +1,9 @@
-import os
+from os import environ
 
 import django
 from django.conf import settings
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "rotary_phone.settings")
+environ.setdefault("DJANGO_SETTINGS_MODULE", "rotary_phone.settings")
 django.setup()
 
 # Celery
@@ -19,6 +19,7 @@ result_accept_content = ["application/json"]
 result_backend = "django-db"
 result_expires = 0
 result_extended = True
+result_serializer = "json"
 task_serializer = "json"
 task_track_started = True
-timezone = os.environ.get("CELERY_TIMEZONE", "Europe/Zurich")
+timezone = environ.get("CELERY_TIMEZONE", "Europe/Zurich")

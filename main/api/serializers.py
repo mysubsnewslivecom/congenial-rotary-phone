@@ -56,3 +56,7 @@ class WatchingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Watching
         fields = "__all__"
+
+
+class TriggerHealthSerializer(serializers.Serializer):
+    uuid = None
