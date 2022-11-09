@@ -48,7 +48,7 @@ LOCAL_APPS = [
     "main.api.apps.ApiConfig",
     "main.gitsvn.apps.GitsvnConfig",
     "main.health.apps.HealthConfig",
-    "main.movflex.apps.MovflexConfig",
+    "main.movieflex.apps.MovieflexConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

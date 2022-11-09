@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from main.gitsvn.models import ProjectDetail
 from main.health.models import DailyTracker, Rule
+from main.movieflex.models import Media, Watching
 
 
 class OpenWeatherSerializer(serializers.Serializer):
@@ -43,3 +44,15 @@ class DailyTrackerSerializer(serializers.ModelSerializer):
         model = DailyTracker
         fields = "__all__"
         lookup_field = "date"
+
+
+class MediaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Media
+        fields = ("id", "name", "category", "sub_category")
+
+
+class WatchingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Watching
+        fields = "__all__"
