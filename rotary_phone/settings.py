@@ -37,6 +37,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "django_celery_results",
     "crispy_forms",
     "drf_spectacular",
     "drf_spectacular_sidecar",
@@ -302,16 +303,5 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
-# Celery
-CELERY_BROKER_URL = REDIS_LOCATION
-BROKER_URL = REDIS_LOCATION
-CELERY_ACCEPT_CONTENT = ["application/json"]
-CELERY_RESULT_SERIALIZER = "json"
-CELERY_TASK_SERIALIZER = "json"
-CELERY_TIMEZONE = getenv("CELERY_TIMEZONE", "Europe/Zurich")
-CELERY_TASK_TRACK_STARTED = True
-CELERY_RESULT_BACKEND = "django-db"
-result_expires = 0
-broker_url = REDIS_LOCATION
-result_extended = True
+
 TASK_DEFAULT_QUEUE = getenv("TASK_DEFAULT_QUEUE", "na")
