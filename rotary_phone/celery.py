@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
+import time
 from os import environ
 
 from celery import Celery
@@ -36,3 +37,13 @@ app.autodiscover_tasks()
 )
 def debug_task(self):
     print(f"Request: {self.request!r}")
+
+
+@app.task(bind=True, name="hello")
+def hello(self, a, b):
+    time.sleep(10)
+    self.update_state(state="PROGRESS", meta={"progress": 50})
+    time.sleep(100)
+    self.update_state(state="PROGRESS", meta={"progress": 90})
+    time.sleep(1)
+    return "hello world: %i" % (a + b)

@@ -9,6 +9,7 @@ django.setup()
 # Celery
 accept_content = ["application/json"]
 broker_url = getattr(settings, "REDIS_LOCATION")
+enable_utc = True
 redis_db = settings.REDIS_DB
 redis_host = settings.REDIS_HOST
 redis_password = settings.REDIS_PASSWORD
