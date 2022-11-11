@@ -3,7 +3,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.vary import vary_on_cookie
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
@@ -12,6 +12,7 @@ from main.api import serializers
 from main.health.models import DailyTracker, Rule
 from main.health.tasks import trigger_actions
 from main.utility.functions import LoggingService
+from main.utility.mixins import EnablePartialUpdateMixin
 
 log = LoggingService()
 
@@ -26,12 +27,12 @@ class RuleAPI(viewsets.ModelViewSet):
     queryset = Rule.objects.all()
 
 
-class DailyActivityViewset(viewsets.ModelViewSet):
+class DailyActivityViewset(EnablePartialUpdateMixin, viewsets.ModelViewSet):
     queryset = DailyTracker.objects.all()
     serializer_class = serializers.DailyTrackerSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     lookup_field = "date"
-    http_method_names = ["get"]
+    # http_method_names = ["get", "patch"]
 
     # @action(detail=False, methods=['get'], url_path='gdt', name='Get daily status')
     # def get_daily_status(self, request, pk=None, *args, **kwargs):
@@ -43,15 +44,51 @@ class DailyActivityViewset(viewsets.ModelViewSet):
         data = DailyTracker.objects.get_daily_status()
         return Response(data=data)
 
+    @method_decorator(never_cache)
+    @method_decorator(vary_on_cookie)
     def retrieve(self, request, *args, **kwargs):
         date = kwargs["date"]
-        data = Rule.objects.filter(rules__date=date).values()
-        return Response(data)
+        # data = Rule.objects.filter(date=date).values()
+        data = list(DailyTracker.objects.filter(date=date).select_related("rule_id"))
+        data_arr = list()
+        for d in data:
+            # data_dict = dict()
+            data_dict = {
+                "name": d.rule_id.name,
+                "id": d.id,
+                "status": d.status,
+                "date": d.date,
+            }
+            data_arr.append(data_dict)
+        return Response(data_arr)
+
+    @method_decorator(never_cache)
+    # @method_decorator(cache_page(0))
+    @method_decorator(vary_on_cookie)
+    def update(self, request, pk=None, *args, **kwargs):
+
+        # log.info(request)
+        # log.info(pk)
+        # log.info(args)
+        # log.info(kwargs)
+        data = request.data
+        id = data["id"]
+        data_status = data["status"]
+
+        result = DailyTracker.objects.filter(id=id).update(status=data_status)
+
+        log.info(f"{result = }")
+
+        message = {"message": f"{result} record updated."}
+
+        return Response(data=message, status=status.HTTP_202_ACCEPTED)
+
+        # return super().update(request, *args, **kwargs)
 
 
 class TriggerHealth(viewsets.ViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
-    # serializer_class = serializers.TriggerHealthSerializer
+    serializer_class = serializers.TriggerHealthSerializer
     http_method_names = ["post"]
 
     def create(self, request, *args, **kwargs):
@@ -60,7 +97,7 @@ class TriggerHealth(viewsets.ViewSet):
         return Response({"task_id": str(task_id), "message": "Task triggered"})
 
     def list(self, request):
-        return Response("list")
+        pass
 
     def retrieve(self, request, pk=None):
         pass

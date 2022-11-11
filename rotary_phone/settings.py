@@ -57,13 +57,13 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.cache.UpdateCacheMiddleware",
+    # "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
+    # "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "rotary_phone.urls"
@@ -172,14 +172,14 @@ REDIS_LOCATION = (
     f"redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
 )
 
-CACHES = {
-    "default": {
-        "BACKEND": REDIS_BACKEND,
-        "LOCATION": REDIS_LOCATION,
-        "OPTIONS": {"CLIENT_CLASS": REDIS_CLIENT_CLASS},
-        "KEY_PREFIX": REDIS_KEY_PREFIX,
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": REDIS_BACKEND,
+#         "LOCATION": REDIS_LOCATION,
+#         "OPTIONS": {"CLIENT_CLASS": REDIS_CLIENT_CLASS},
+#         "KEY_PREFIX": REDIS_KEY_PREFIX,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

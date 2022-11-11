@@ -42,7 +42,7 @@ class RulesSerializer(serializers.ModelSerializer):
 class DailyTrackerSerializer(serializers.ModelSerializer):
     class Meta:
         model = DailyTracker
-        fields = "__all__"
+        fields = ("date", "status", "id", "rule_id")
         lookup_field = "date"
 
 
