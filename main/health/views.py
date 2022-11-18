@@ -1,9 +1,9 @@
-import yaml
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from django.conf import settings
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView
+
 from main.health.forms import RuleForm
 from main.health.models import DailyTracker, Rule
 from main.utility.functions import LoggingService
@@ -13,7 +13,6 @@ log = LoggingService()
 
 CACHE_TTL = getattr(settings, "CACHE_TTL", DEFAULT_TIMEOUT)
 REDIS_KEY_PREFIX = str(getattr(settings, "REDIS_KEY_PREFIX")).lower()
-
 
 
 class HealthHomeView(TemplateView):
@@ -38,20 +37,26 @@ class JSONView(JSONResponseMixin, TemplateView):
     def render_to_response(self, context, **response_kwargs):
         context = dict()
         items = dict()
-        daily_tracker_today = cache.get(f'{REDIS_KEY_PREFIX}_models__daily_tracker_today')
-        rules = cache.get(f'{REDIS_KEY_PREFIX}_models__rules')
+        daily_tracker_today = cache.get(
+            f"{REDIS_KEY_PREFIX}_models__daily_tracker_today"
+        )
+        rules = cache.get(f"{REDIS_KEY_PREFIX}_models__rules")
 
         if rules is None:
             log.debug("Getting Rule data from database")
             rules = list(Rule.objects.filter(is_active=True).values("name"))
-            cache.set(f'{REDIS_KEY_PREFIX}_models__rules', rules, 60 * 5)
+            cache.set(f"{REDIS_KEY_PREFIX}_models__rules", rules, 60 * 5)
         else:
             log.debug("Getting Rule data from cache")
 
         if daily_tracker_today is None:
             log.debug("Getting DailyTracker data from database")
             daily_tracker_today = DailyTracker.objects.get_daily_status()
-            cache.set(f'{REDIS_KEY_PREFIX}_models__daily_tracker_today', daily_tracker_today, 60 * 5)
+            cache.set(
+                f"{REDIS_KEY_PREFIX}_models__daily_tracker_today",
+                daily_tracker_today,
+                60 * 5,
+            )
         else:
             log.debug("Getting DailyTracker data from cache")
 

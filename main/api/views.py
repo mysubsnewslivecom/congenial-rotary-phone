@@ -3,12 +3,12 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from django_celery_results.models import TaskResult
 from rest_framework import generics, viewsets
 from rest_framework.response import Response
 
 from main.api import serializers
 from main.utility.functions import OpenWeather
-from django_celery_results.models import TaskResult
 
 CACHE_TTL = getattr(settings, "CACHE_TTL", DEFAULT_TIMEOUT)
 

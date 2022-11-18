@@ -1,9 +1,9 @@
+from django_celery_results.models import TaskResult
 from rest_framework import serializers
 
 from main.gitsvn.models import ProjectDetail
 from main.health.models import DailyTracker, Rule
 from main.movieflex.models import Media, Watching
-from django_celery_results.models import TaskResult
 
 
 class OpenWeatherSerializer(serializers.Serializer):
