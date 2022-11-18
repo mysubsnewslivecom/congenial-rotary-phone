@@ -32,13 +32,11 @@ class DailyActivityViewset(EnablePartialUpdateMixin, viewsets.ModelViewSet):
     serializer_class = serializers.DailyTrackerSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     lookup_field = "date"
-    # http_method_names = ["get", "patch"]
+    http_method_names = ["get", "patch"]
 
     # @action(detail=False, methods=['get'], url_path='gdt', name='Get daily status')
-    # def get_daily_status(self, request, pk=None, *args, **kwargs):
     @action(detail=False, url_path="gdt", methods=["get"], name="Get daily status")
     @method_decorator(never_cache)
-    # @method_decorator(cache_page(0))
     @method_decorator(vary_on_cookie)
     def get_daily_status(self, request, *args, **kwargs):
         data = DailyTracker.objects.get_daily_status()
@@ -62,28 +60,15 @@ class DailyActivityViewset(EnablePartialUpdateMixin, viewsets.ModelViewSet):
             data_arr.append(data_dict)
         return Response(data_arr)
 
-    @method_decorator(never_cache)
-    # @method_decorator(cache_page(0))
-    @method_decorator(vary_on_cookie)
     def update(self, request, pk=None, *args, **kwargs):
 
-        # log.info(request)
-        # log.info(pk)
-        # log.info(args)
-        # log.info(kwargs)
         data = request.data
         id = data["id"]
         data_status = data["status"]
-
         result = DailyTracker.objects.filter(id=id).update(status=data_status)
-
-        log.info(f"{result = }")
-
         message = {"message": f"{result} record updated."}
 
         return Response(data=message, status=status.HTTP_202_ACCEPTED)
-
-        # return super().update(request, *args, **kwargs)
 
 
 class TriggerHealth(viewsets.ViewSet):
@@ -93,7 +78,7 @@ class TriggerHealth(viewsets.ViewSet):
 
     def create(self, request, *args, **kwargs):
         task_id = trigger_actions.delay()
-        log.info(task_id)
+        log.info(f"{str(task_id) = }")
         return Response({"task_id": str(task_id), "message": "Task triggered"})
 
     def list(self, request):

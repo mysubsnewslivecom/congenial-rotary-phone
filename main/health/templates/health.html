@@ -14,6 +14,7 @@
   </button>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'health:rule_create_view' %}">Create</a></li>
+    <li><a class="dropdown-item" href="#" onclick="javascript:health.triggerFetch('/api/trigger/health/daily/', 'POST')">Trigger Daily</a></li>
   </ul>
 </div>
 
@@ -26,4 +27,7 @@
 {% endblock content %}
 
 {% block js %}
+
+  <script src="{% static 'dist/js/pages/health/health.js' %}" type="application/javascript"></script>
+
 {% endblock js %}

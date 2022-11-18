@@ -3,6 +3,7 @@ from rest_framework import serializers
 from main.gitsvn.models import ProjectDetail
 from main.health.models import DailyTracker, Rule
 from main.movieflex.models import Media, Watching
+from django_celery_results.models import TaskResult
 
 
 class OpenWeatherSerializer(serializers.Serializer):
@@ -60,3 +61,9 @@ class WatchingSerializer(serializers.ModelSerializer):
 
 class TriggerHealthSerializer(serializers.Serializer):
     uuid = None
+
+
+class CeleryTaskResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskResult
+        fields = ("task_id", "status", "result", "date_done")

@@ -52,6 +52,7 @@ class DailyTrackerManager(models.Manager):
         pending = daily_st.filter(status=False).values_list("rule_id", flat=True)
 
         result = {
+            "date": str(self.date_today.strftime("%d-%b-%Y")),
             "count": {"pending": pending.count(), "completed": completed.count()},
             "pending": list(
                 Rule.objects.filter(id__in=pending).values_list("name", flat=True)
@@ -60,7 +61,6 @@ class DailyTrackerManager(models.Manager):
                 Rule.objects.filter(id__in=completed).values_list("name", flat=True)
             ),
         }
-        log.info(result)
         return result
 
     # def get_daily_status(self):

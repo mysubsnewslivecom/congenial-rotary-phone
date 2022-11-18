@@ -12,12 +12,19 @@ class Media(PrimaryIdMixin):
     ]
     SUB_CATEGORY = [
         ("FANTASY", "Fantasy"),
-        ("ACTION", "Action"),
         ("ADVENTURE", "Adventure"),
+        ("ACTION", "Action"),
+        ("COMEDY", "Comedy"),
+        ("CRIME", "Crime"),
+        ("DRAMA", "Drama"),
+        ("SCIENCE_FICTION", "Science Fiction"),
+        ("DRAMA", "Drama"),
+        ("HORROR", "Horror"),
     ]
     name = models.CharField(help_text="Name", max_length=250, unique=True)
     category = models.CharField(choices=CATEGORY, max_length=250)
     sub_category = models.CharField(choices=SUB_CATEGORY, max_length=250)
+    thumb_nail = models.ImageField(verbose_name="default", default="linux.jpg")
 
     class Meta:
         ordering = ["-id"]
