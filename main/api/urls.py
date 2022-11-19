@@ -22,7 +22,7 @@ router.register(
 router.register(
     r"movieflex/watching", viewset=views_movieflex.WatchingViewset, basename="watching"
 )
-router.register(r"tasks", viewset=views.TaskResultViewset, basename="tasks")
+router.register(r"celery/tasks", viewset=views.TaskResultViewset, basename="tasks")
 
 
 urlpatterns = [

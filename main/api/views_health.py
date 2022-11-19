@@ -24,6 +24,7 @@ CACHE_TTL = getattr(settings, "CACHE_TTL", DEFAULT_TIMEOUT)
 # @method_decorator(vary_on_cookie)
 class RuleAPI(viewsets.ModelViewSet):
     serializer_class = serializers.RulesSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Rule.objects.all()
 
 

@@ -50,7 +50,8 @@ class DailyTrackerSerializer(serializers.ModelSerializer):
 class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Media
-        fields = ("id", "name", "category", "sub_category")
+        # fields = ("id", "name", "category", "sub_category")
+        fields = "__all__"
 
 
 class WatchingSerializer(serializers.ModelSerializer):
