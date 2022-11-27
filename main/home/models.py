@@ -1,12 +1,15 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone as tz
+from django.utils.translation import gettext_lazy as _
+import uuid
 
 from main.utility.mixins import (
     ActiveStatusMixin,
     PrimaryIdMixin,
     TimestampMixin,
     UUIDMixin,
+    StatusMixin
 )
 
 
@@ -38,14 +41,25 @@ class User(AbstractUser):
     state = models.CharField(max_length=300, null=True)
     country = models.CharField(max_length=300, null=True)
     zip = models.CharField(max_length=300, null=True)
+    skills = models.JSONField(_("Skills"), default=dict)
+    notes = models.TextField(_("Notes"))
+    education = models.JSONField(_("Education"), default=dict)
 
-
-class Audit(PrimaryIdMixin, TimestampMixin, UUIDMixin):
+class Audit(PrimaryIdMixin, TimestampMixin, UUIDMixin, StatusMixin):
     message = models.CharField(
         max_length=1000,
         verbose_name="Message",
         help_text="message",
     )
+    task_id = models.CharField(_("Task Id"), blank=True, null=True, max_length=50)
+    celery_task_id = models.CharField(_("Celery Task Id"), blank=True, null=True, max_length=50)
+
+    class Meta:
+        ordering = ["-id"]
+        verbose_name_plural = "Audit"
+
+    def __str__(self) -> str:
+        return "| ".join([str(self.id), str(self.message)])
 
 
 class Category(PrimaryIdMixin, TimestampMixin, ActiveStatusMixin):
@@ -65,4 +79,4 @@ class Category(PrimaryIdMixin, TimestampMixin, ActiveStatusMixin):
         ordering = ["-id"]
 
     def __str__(self) -> str:
-        return "|".join([str(self.category), str(self.sub_category)])
+        return "| ".join([str(self.category), str(self.sub_category)])

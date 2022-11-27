@@ -1,30 +1,13 @@
 {% load static %}
 
-<div aria-live="polite" aria-atomic="true" class="position-relative">
-  <div class="toast-container bottom-0 end-0 p-3 style="z-index: 11"">
-    <div id="toastId" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-    </div>
-  </div>
-</div>
-
-<!--
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <strong class="toast-title me-auto">Bootstrap</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body"></div>
-  </div>
-</div>
--->
+  <div class="toast-container end-0 p-3 position-fixed" style="top: 10%; z-index: 5;"></div>
 
 {% if messages %}
 {% for message in messages %}
 <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show" {% endif %} id="alertID">
 
-    <strong>{{ message.tags|capfirst }}!</strong> {{ message|safe }}
-    <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+  <strong>{{ message.tags|capfirst }}!</strong> {{ message|safe }}
+  <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
 
 </div>
 {% endfor %}

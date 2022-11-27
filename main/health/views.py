@@ -8,6 +8,9 @@ from main.health.forms import RuleForm
 from main.health.models import DailyTracker, Rule
 from main.utility.functions import LoggingService
 from main.utility.mixins import JSONResponseMixin
+from main.home.mixins import AuditMixins
+from main.home.models import Audit
+from uuid import uuid4
 
 log = LoggingService()
 
@@ -33,24 +36,33 @@ class RuleCreateView(CreateView):
     success_message = "Rule added!"
 
 
-class JSONView(JSONResponseMixin, TemplateView):
+class JSONView(JSONResponseMixin, AuditMixins, TemplateView):
     def render_to_response(self, context, **response_kwargs):
-        context = dict()
+
+
+        task_id = str(uuid4())
+        # response_kwargs["task_id"] = task_id
+
         items = dict()
+        context = dict()
+        task_kwargs = dict()
+
+        task_kwargs["task_id"] = task_id
+
         daily_tracker_today = cache.get(
             f"{REDIS_KEY_PREFIX}_models__daily_tracker_today"
         )
         rules = cache.get(f"{REDIS_KEY_PREFIX}_models__rules")
 
         if rules is None:
-            log.debug("Getting Rule data from database")
+            self.debug("Getting Rule data from database", **task_kwargs)
             rules = list(Rule.objects.filter(is_active=True).values("name"))
             cache.set(f"{REDIS_KEY_PREFIX}_models__rules", rules, 60 * 5)
         else:
-            log.debug("Getting Rule data from cache")
+            self.debug("Getting Rule data from cache", **task_kwargs)
 
         if daily_tracker_today is None:
-            log.debug("Getting DailyTracker data from database")
+            self.debug("Getting DailyTracker data from database", **task_kwargs)
             daily_tracker_today = DailyTracker.objects.get_daily_status()
             cache.set(
                 f"{REDIS_KEY_PREFIX}_models__daily_tracker_today",
@@ -58,7 +70,7 @@ class JSONView(JSONResponseMixin, TemplateView):
                 60 * 5,
             )
         else:
-            log.debug("Getting DailyTracker data from cache")
+            self.debug("Getting DailyTracker data from cache", **task_kwargs)
 
         context["rules"] = rules
         context["daily_tracker"] = daily_tracker_today

@@ -13,6 +13,7 @@ from main.health.models import DailyTracker, Rule
 from main.health.tasks import trigger_actions
 from main.utility.functions import LoggingService
 from main.utility.mixins import EnablePartialUpdateMixin
+from main.home.mixins import AuditMixins
 
 log = LoggingService()
 
@@ -72,13 +73,18 @@ class DailyActivityViewset(EnablePartialUpdateMixin, viewsets.ModelViewSet):
         return Response(data=message, status=status.HTTP_202_ACCEPTED)
 
 
-class TriggerHealth(viewsets.ViewSet):
+class TriggerHealth(AuditMixins, viewsets.ViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = serializers.TriggerHealthSerializer
     http_method_names = ["post"]
 
     def create(self, request, *args, **kwargs):
-        task_id = trigger_actions.delay()
+        audit = dict()
+        audit["task_id"] = self.generate_uuid()
+        self.info("TriggerHealth Action tiggered.", **audit)
+        task_id = trigger_actions.delay(**audit)
+        audit["celery_task_id"] = str(task_id)
+        self.info("TriggerHealth Celery tasks tiggered.", **audit)
         log.info(f"{str(task_id) = }")
         return Response({"task_id": str(task_id), "message": "Task triggered"})
 

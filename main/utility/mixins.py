@@ -2,8 +2,10 @@ import uuid
 
 from django.db import models
 from django.http import JsonResponse
+from django.utils.translation import gettext_lazy as _
 
 from main.utility.functions import LoggingService
+from main.utility.common import STATUS, Status
 
 log = LoggingService()
 
@@ -70,7 +72,7 @@ class JSONResponseMixin:
         """
         Returns an object that will be serialized as JSON by json.dumps().
         """
-
+        log.info(f"{context = }")
         return context
 
 
@@ -81,6 +83,19 @@ class EnablePartialUpdateMixin:
     https://github.com/encode/django-rest-framework/blob/91916a4db14cd6a06aca13fb9a46fc667f6c0682/rest_framework/mixins.py#L64
     """
 
-    def partial_update(self, request, *args, **kwargs):
+    def partial_update(self, request, pk=None, *args, **kwargs):
         kwargs["partial"] = True
-        return self.update(request, *args, **kwargs)
+        return self.update(request, pk, *args, **kwargs)
+
+
+class StatusMixin(models.Model):
+
+    status = models.CharField(_("Status"), max_length=15, choices=STATUS)
+
+
+    class Meta:
+        """Setting up the abstract model class"""
+
+        abstract = True
+
+

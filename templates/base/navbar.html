@@ -9,11 +9,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse text-white" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i
+          <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i
               class="fa-solid fa-house"></i> Home</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:home_list_view' %}"><i
@@ -22,8 +22,8 @@
         </li>
 
         <li class="nav-item dropdown text-decoration-none">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
-            style="color: darkgrey"><i class="fa-brands fa-git"></i> Git</a>
+          <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            ><i class="fa-brands fa-git"></i> Git</a>
           <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
             <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'git:git_list_view' %}"><i
                   class="fa-brands fa-git"></i> Projects</a></li>
@@ -36,8 +36,8 @@
         </li>
 
         <li class="nav-item dropdown text-decoration-none">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
-            style="color: darkgrey"><i class="fa-solid fa-heart-pulse"></i> Health</a>
+          <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            ><i class="fa-solid fa-heart-pulse"></i> Health</a>
           <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
             <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i
                   class="fa-solid fa-heart-pulse"></i> Health</a></li>
@@ -45,48 +45,36 @@
         </li>
 
         <li class="nav-item dropdown text-decoration-none">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
-            style="color: darkgrey"><i class="nav-icon fas fa-archway"></i> System</a>
+          <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            ><i class="nav-icon fas fa-archway"></i> System</a>
           <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
             <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i
-                  class="fa-solid fa-heart-pulse"></i> Health</a></li>
+                  class="fa-solid fa-heart-pulse"></i> System</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown text-decoration-none">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
-            style="color: darkgrey"><i class="nav-icon fas fa-archway"></i> Pages</a>
+          <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+            ><i class="nav-icon fas fa-archway"></i> Pages</a>
           <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
-            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i
-                  class="bi bi-file-post"></i> Todo</a></li>
-
-            <li class="dropstart">
-              <a href="#" class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">Submenu Left</a>
-              <ul class="dropdown-menu dropdown-menu-left mx-0 shadow w-220px">
-                <li><a class="dropdown-item" href=""> Third level 1</a></li>
-                <li><a class="dropdown-item" href=""> Third level 2</a></li>
-                <li><a class="dropdown-item" href=""> Third level 3</a></li>
-                <li><a class="dropdown-item" href=""> Third level 4</a></li>
-                <li><a class="dropdown-item" href=""> Third level 5</a></li>
-              </ul>
-            </li>
-
-
+            <li><a class="dropdown-item d-flex gap-2 align-items-center"  target="_blank" href="http://localhost:8080/"><i
+                  class="fa-solid fa-heart-pulse"></i> pgAdmin4</a></li>
           </ul>
         </li>
+
 
       </ul>
-      <a class="nav-item text-bg-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-        aria-controls="offcanvasWithBothOptions">
-        <i class="bi bi-list"></i></a>
+      <a class="nav-item text-bg-dark text-decoration-none text-white" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+        aria-controls="offcanvasWithBothOptions" >
+        <i class="fa-solid fa-bars"></i></a>
 
       <li class="d-flex nav-item dropdown text-decoration-none">
-        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false"
-          style="color: darkgrey">{{request.user.get_full_name}}</a>
+        <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown" aria-expanded="false"
+          >{{request.user.get_full_name}}</a>
         <ul class="dropdown-menu dropdown-menu-end mx-0 shadow w-220px">
           <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'admin:index' %}"><i
                 class="fa-solid fa-user-doctor"></i> Admin</a></li>
-          <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'api:swagger-ui' %}"><i
+          <li><a class="dropdown-item d-flex gap-2 align-items-center" target="_blank" href="{% url 'api:swagger-ui' %}"><i
                 class="fa-solid fa-tape"></i> Api</a></li>
           <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'home:profile_list_view' %}"><i
                 class="bi bi-person"></i> Profile</a></li>

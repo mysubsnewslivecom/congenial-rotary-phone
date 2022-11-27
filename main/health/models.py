@@ -51,8 +51,19 @@ class DailyTrackerManager(models.Manager):
         completed = daily_st.filter(status=True).values_list("rule_id", flat=True)
         pending = daily_st.filter(status=False).values_list("rule_id", flat=True)
 
+        data_arr = list()
+        for d in daily_st:
+            # data_dict = dict()
+            data_dict = {
+                "name": d.rule_id.name,
+                "id": d.id,
+                "status": d.status,
+            }
+            data_arr.append(data_dict)
+        tasks = data_arr
+
         result = {
-            "date": str(self.date_today.strftime("%d-%b-%Y")),
+            "date": str(self.date_today.strftime("%Y-%m-%d")),
             "count": {"pending": pending.count(), "completed": completed.count()},
             "pending": list(
                 Rule.objects.filter(id__in=pending).values_list("name", flat=True)
@@ -60,6 +71,7 @@ class DailyTrackerManager(models.Manager):
             "completed": list(
                 Rule.objects.filter(id__in=completed).values_list("name", flat=True)
             ),
+            "tasks": tasks
         }
         return result
 

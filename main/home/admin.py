@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from main.home.models import User
+from main.home.models import User, Audit
 
 
 class UserCreationForm(forms.ModelForm):
@@ -148,6 +148,17 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         (
+            "About Me",
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    "education",
+                    "skills",
+                    "notes",
+                ),
+            },
+        ),
+        (
             "Important Dates",
             {"classes": ("collapse",), "fields": (("date_joined", "last_modified"),)},
         ),
@@ -179,3 +190,4 @@ admin.site.register(User, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 # admin.site.unregister(Group)
+admin.site.register(Audit)

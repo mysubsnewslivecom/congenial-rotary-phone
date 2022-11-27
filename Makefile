@@ -5,6 +5,10 @@ start:
 	source ~/workspace/virtualenv/congenial-rotary-phone/bin/activate && \
 	python3 manage.py start
 
+startcelery:
+	source ~/workspace/virtualenv/congenial-rotary-phone/bin/activate && \
+	python3 -m celery -A rotary_phone worker --loglevel info -E
+
 dbbackup:
 	source ~/workspace/virtualenv/congenial-rotary-phone/bin/activate && \
 	python3 manage.py dbbackup
