@@ -4,6 +4,7 @@ from rest_framework import serializers
 from main.gitsvn.models import ProjectDetail
 from main.health.models import DailyTracker, Rule
 from main.movieflex.models import Media, Watching
+from main.tasks.models import Todo
 
 
 class OpenWeatherSerializer(serializers.Serializer):
@@ -68,3 +69,9 @@ class CeleryTaskResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaskResult
         fields = ("task_id", "status", "result", "date_done")
+
+
+class TodoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Todo
+        fields = ("id", "status", "name")

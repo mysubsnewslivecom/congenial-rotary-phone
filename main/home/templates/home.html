@@ -40,35 +40,79 @@
 
 <div class="row">
 
-  {% include 'dashboard/widgets/current_temperature.html' with temperature=temperature %}
+  <div class="col-lg-12 col-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12 bg-light text-right">
+            <button type="button" class="btn btn-link float-end" data-bs-toggle="collapse"
+              data-bs-target="#refreshDashboard" aria-expanded="false" aria-controls="refreshDashboard"
+              style="text-decoration: none; border: 1px dashed #61affe; ">
+              <i class="bi bi-arrows-expand"></i>
+            </button>
+            <button type="button" class="btn btn-link float-end" data-bs-target="#refreshDashboard"
+              aria-expanded="false" aria-controls="refreshDashboard" onclick="javascript:start.refreshDashboard();"
+              style="text-decoration: none; border: 1px dashed #61affe;">
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+            <h3 class="float-start">Dashboard</h3>
+          </div>
+        </div>
+      </div>
+      <div class="collapse collapse-horizontal" id="refreshDashboard">
+        <div class="card-body">
+          <div class="row">
 
-  {% include 'dashboard/widgets/pending_review.html' with pending_reviewopen_tasksunread_articles=pending_review %}
+            {% include 'dashboard/widgets/current_temperature.html' with temperature=temperature %}
 
-  {% include 'dashboard/widgets/open_rules.html' with open_tasksunread_articles=open_tasksunread_articles %}
+            {% include 'dashboard/widgets/pending_review.html' with pending_reviewopen_tasksunread_articles=pending_review %}
 
-  {% include 'dashboard/widgets/unread_articles.html' with unread_articles=unread_articles %}
+            {% include 'dashboard/widgets/open_rules.html' with open_tasksunread_articles=open_tasksunread_articles %}
 
-  {% include 'dashboard/widgets/current_ip.html' with budget_remaining=budget_remaining %}
+            {% include 'dashboard/widgets/unread_articles.html' with unread_articles=unread_articles %}
 
-  {% include 'dashboard/widgets/budget_remaining.html' with budget_consumed=budget_consumed %}
+            {% include 'dashboard/widgets/current_ip.html' with budget_remaining=budget_remaining %}
 
-  {% include 'dashboard/widgets/budget_consumed.html' with current_ip=current_ip %}
+            {% include 'dashboard/widgets/budget_remaining.html' with budget_consumed=budget_consumed %}
 
-  {% include 'dashboard/widgets/international_space_station.html' with location=international_space_station %}
+            {% include 'dashboard/widgets/budget_consumed.html' with current_ip=current_ip %}
+
+            {% include 'dashboard/widgets/international_space_station.html' with location=international_space_station %}
+          </div>
+
+          <div class="row">
+            {% include 'dashboard/widgets/timer.html' %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
-<div class="b-divider"></div>
-<div class="row">
-  {% include 'dashboard/widgets/timer.html' %}
-</div>
 <div class="b-divider"></div>
 
 <div class="row">
   {% comment %} {% include 'dashboard/widgets/todo.html' %} {% endcomment %}
-
 </div>
+
 <div class="row">
   {% include 'dashboard/sections/rules.html' %}
+</div>
+
+<div class="b-divider"></div>
+<div class="row">
+  {% include 'dashboard/sections/list_projects.html' %}
+</div>
+<div class="b-divider"></div>
+<div class="row">
+  {% include 'dashboard/sections/users.html' %}
+</div>
+<div class="b-divider"></div>
+<div class="row">
+  {% include 'dashboard/sections/tasks.html' %}
 </div>
 <div class="b-divider"></div>
 

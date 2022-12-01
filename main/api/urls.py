@@ -2,7 +2,7 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
-from main.api import views, views_gitsvn, views_health, views_home, views_movieflex
+from main.api import views, views_gitsvn, views_health, views_home, views_movieflex, views_tasks
 
 app_name = "api"
 
@@ -23,6 +23,7 @@ router.register(
     r"movieflex/watching", viewset=views_movieflex.WatchingViewset, basename="watching"
 )
 router.register(r"celery/tasks", viewset=views.TaskResultViewset, basename="tasks")
+router.register(r"tasks/todo", viewset=views_tasks.TodoViewset, basename="todo")
 
 
 urlpatterns = [

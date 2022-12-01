@@ -41,7 +41,9 @@
           <ul class="dropdown-menu dropdown-menu-start mx-0 shadow w-220px">
             <li><a class="dropdown-item d-flex gap-2 align-items-center" href="{% url 'health:health_list_view' %}"><i
                   class="fa-solid fa-heart-pulse"></i> Health</a></li>
+            <li><a class="dropdown-item d-flex gap-2 align-items-center" href="#" onclick="javascript:health.triggerFetch('/api/trigger/health/daily/', 'POST')">Trigger Daily</a></li>
           </ul>
+
         </li>
 
         <li class="nav-item dropdown text-decoration-none">

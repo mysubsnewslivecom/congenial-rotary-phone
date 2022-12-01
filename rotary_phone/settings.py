@@ -50,6 +50,7 @@ LOCAL_APPS = [
     "main.gitsvn.apps.GitsvnConfig",
     "main.health.apps.HealthConfig",
     "main.movieflex.apps.MovieflexConfig",
+    "main.tasks.apps.TasksConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
