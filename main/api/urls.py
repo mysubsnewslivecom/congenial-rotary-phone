@@ -2,7 +2,14 @@ from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework import routers
 
-from main.api import views, views_gitsvn, views_health, views_home, views_movieflex, views_tasks
+from main.api import (
+    views,
+    views_gitsvn,
+    views_health,
+    views_home,
+    views_movieflex,
+    views_tasks,
+)
 
 app_name = "api"
 

@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
@@ -6,11 +8,9 @@ from django.views.generic import CreateView, TemplateView
 
 from main.health.forms import RuleForm
 from main.health.models import DailyTracker, Rule
+from main.home.mixins import AuditMixins
 from main.utility.functions import LoggingService
 from main.utility.mixins import JSONResponseMixin
-from main.home.mixins import AuditMixins
-from main.home.models import Audit
-from uuid import uuid4
 
 log = LoggingService()
 
@@ -38,7 +38,6 @@ class RuleCreateView(CreateView):
 
 class JSONView(JSONResponseMixin, AuditMixins, TemplateView):
     def render_to_response(self, context, **response_kwargs):
-
 
         task_id = str(uuid4())
         # response_kwargs["task_id"] = task_id

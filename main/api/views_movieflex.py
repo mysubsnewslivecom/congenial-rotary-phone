@@ -18,3 +18,7 @@ class MediaViewset(viewsets.ModelViewSet):
 class WatchingViewset(viewsets.ModelViewSet):
     serializer_class = serializers.WatchingSerializer
     queryset = Watching.objects.all()
+
+
+class WebScrappingViewset(viewsets.ViewSet):
+    pass

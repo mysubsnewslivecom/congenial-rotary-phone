@@ -3,10 +3,11 @@ from time import sleep
 from celery import current_task, shared_task, states
 from celery.exceptions import TaskError
 from django.core.management import call_command
+
 from main.utility.functions import LoggingService
-from main.home.mixins import AuditMixins
 
 log = LoggingService()
+
 
 @shared_task(bind=True)
 def test_func(self):

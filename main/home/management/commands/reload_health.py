@@ -1,9 +1,9 @@
 import datetime
-from django.conf import settings
 
-from django.core.management.base import BaseCommand
+from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.core.management.base import BaseCommand
 
 from main.health.models import DailyTracker, Rule
 from main.utility.functions import LoggingService
@@ -12,6 +12,7 @@ log = LoggingService()
 
 CACHE_TTL = getattr(settings, "CACHE_TTL", DEFAULT_TIMEOUT)
 REDIS_KEY_PREFIX = str(getattr(settings, "REDIS_KEY_PREFIX")).lower()
+
 
 class Command(BaseCommand):
     help = "trigger daily tracker"

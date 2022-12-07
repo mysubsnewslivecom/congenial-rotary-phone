@@ -74,4 +74,4 @@ class CeleryTaskResultSerializer(serializers.ModelSerializer):
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ("id", "status", "name")
+        fields = ("id", "status", "name", "is_active")

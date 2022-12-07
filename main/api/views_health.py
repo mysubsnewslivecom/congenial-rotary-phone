@@ -11,9 +11,9 @@ from rest_framework.response import Response
 from main.api import serializers
 from main.health.models import DailyTracker, Rule
 from main.health.tasks import trigger_actions
+from main.home.mixins import AuditMixins
 from main.utility.functions import LoggingService
 from main.utility.mixins import EnablePartialUpdateMixin
-from main.home.mixins import AuditMixins
 
 log = LoggingService()
 

@@ -2,14 +2,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone as tz
 from django.utils.translation import gettext_lazy as _
-import uuid
 
 from main.utility.mixins import (
     ActiveStatusMixin,
     PrimaryIdMixin,
+    StatusMixin,
     TimestampMixin,
     UUIDMixin,
-    StatusMixin
 )
 
 
@@ -45,6 +44,7 @@ class User(AbstractUser):
     notes = models.TextField(_("Notes"))
     education = models.JSONField(_("Education"), default=dict)
 
+
 class Audit(PrimaryIdMixin, TimestampMixin, UUIDMixin, StatusMixin):
     message = models.CharField(
         max_length=1000,
@@ -52,7 +52,9 @@ class Audit(PrimaryIdMixin, TimestampMixin, UUIDMixin, StatusMixin):
         help_text="message",
     )
     task_id = models.CharField(_("Task Id"), blank=True, null=True, max_length=50)
-    celery_task_id = models.CharField(_("Celery Task Id"), blank=True, null=True, max_length=50)
+    celery_task_id = models.CharField(
+        _("Celery Task Id"), blank=True, null=True, max_length=50
+    )
 
     class Meta:
         ordering = ["-id"]

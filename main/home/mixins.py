@@ -1,10 +1,8 @@
-
-from django.utils.translation import gettext_lazy as _
-
-from main.utility.functions import LoggingService
-from main.utility.common import Status
-from main.home.models import Audit
 from uuid import uuid4
+
+from main.home.models import Audit
+from main.utility.common import Status
+from main.utility.functions import LoggingService
 
 
 class AuditMixins:
@@ -75,7 +73,6 @@ class AuditMixins:
         task_id = uuid4()
         return str(task_id)
 
-
     def payload(self, *args, **kwargs):
         print(f"{kwargs = }")
         self.log = LoggingService()
@@ -96,4 +93,3 @@ class AuditMixins:
         # audit.task_id = kwargs["task_id"] if 'task_id' in kwargs.keys() else None
         audit.save()
         # self.info("saved")
-

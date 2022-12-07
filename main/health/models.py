@@ -71,7 +71,7 @@ class DailyTrackerManager(models.Manager):
             "completed": list(
                 Rule.objects.filter(id__in=completed).values_list("name", flat=True)
             ),
-            "tasks": tasks
+            "tasks": tasks,
         }
         return result
 

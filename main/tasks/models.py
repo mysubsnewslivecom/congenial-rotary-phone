@@ -1,7 +1,7 @@
 from django.db import models
-
-from main.utility.mixins import PrimaryIdMixin, TimestampMixin, ActiveStatusMixin
 from django.utils.translation import gettext_lazy as _
+
+from main.utility.mixins import ActiveStatusMixin, PrimaryIdMixin, TimestampMixin
 
 
 class Todo(PrimaryIdMixin, TimestampMixin, ActiveStatusMixin):

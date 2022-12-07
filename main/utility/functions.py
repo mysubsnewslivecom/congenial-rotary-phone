@@ -3,9 +3,14 @@ import sys
 from os import getenv
 from typing import Optional
 
+import requests
+import urllib3
+from bs4 import BeautifulSoup as BS
 from django.conf import settings
 from loguru import logger
 from requests import request
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class LoggingService:
@@ -93,3 +98,15 @@ class Ipify:
                 {"statuscode": resp.status_code, "statusmessage": resp.text}, indent=4
             )
 
+
+class WebScrapping:
+    def __init__(
+        self, url: Optional[str] = None, features: Optional[str] = "html.parser"
+    ):
+        self.url = url
+        self.features = features
+
+    def get_soup(self):
+        content = requests.get(self.url).content
+        soup = BS(content, features=self.features)
+        return soup

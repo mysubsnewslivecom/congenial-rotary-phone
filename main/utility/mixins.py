@@ -4,8 +4,8 @@ from django.db import models
 from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 
+from main.utility.common import STATUS
 from main.utility.functions import LoggingService
-from main.utility.common import STATUS, Status
 
 log = LoggingService()
 
@@ -92,10 +92,7 @@ class StatusMixin(models.Model):
 
     status = models.CharField(_("Status"), max_length=15, choices=STATUS)
 
-
     class Meta:
         """Setting up the abstract model class"""
 
         abstract = True
-
-
