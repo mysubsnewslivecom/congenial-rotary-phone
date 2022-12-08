@@ -75,3 +75,13 @@ class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
         fields = ("id", "status", "name", "is_active")
+
+
+class WebscrapingSerializer(serializers.Serializer):
+    title = serializers.CharField()
+    link = serializers.URLField()
+    pub_date = serializers.DateTimeField()
+    id_mal = serializers.IntegerField()
+    ep = serializers.CharField()
+    description = serializers.CharField()
+
