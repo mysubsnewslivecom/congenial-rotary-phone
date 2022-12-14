@@ -85,3 +85,13 @@ class WebscrapingSerializer(serializers.Serializer):
     ep = serializers.CharField()
     description = serializers.CharField()
 
+class EPLSerializer(serializers.Serializer):
+    position = serializers.IntegerField()
+    team = serializers.CharField()
+    played = serializers.IntegerField()
+    wins = serializers.IntegerField()
+    draws = serializers.IntegerField()
+    lost = serializers.IntegerField()
+    goal_difference = serializers.IntegerField()
+    points = serializers.IntegerField()
+

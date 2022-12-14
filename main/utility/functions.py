@@ -110,3 +110,8 @@ class WebScrapping:
         content = requests.get(self.url).content
         soup = BS(content, features=self.features)
         return soup
+
+    def get_soup_text(self):
+        content = requests.get(self.url).text
+        soup = BS(content, features=self.features)
+        return soup

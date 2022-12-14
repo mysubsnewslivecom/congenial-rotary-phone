@@ -32,6 +32,7 @@ router.register(
 router.register(r"celery/tasks", viewset=views.TaskResultViewset, basename="tasks")
 router.register(r"tasks/todo", viewset=views_tasks.TodoViewset, basename="todo")
 router.register(r"movieflex/anime", viewset=views_movieflex.WebScrappingViewset, basename="movieflex-anime")
+router.register(r"home/epl", viewset=views_home.EPLListing, basename="home-epl")
 
 
 urlpatterns = [

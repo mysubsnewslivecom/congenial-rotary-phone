@@ -42,3 +42,6 @@ class UserLogout(LogoutView):
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = "profile.html"
+
+class FifaView(LoginRequiredMixin, TemplateView):
+    template_name = "fifa.html"
