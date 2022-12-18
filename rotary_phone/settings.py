@@ -51,6 +51,7 @@ LOCAL_APPS = [
     "main.health.apps.HealthConfig",
     "main.movieflex.apps.MovieflexConfig",
     "main.tasks.apps.TasksConfig",
+    "main.system.apps.SystemConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from main.home.models import Audit, User
+from main.home.models import Audit, User, ActionList
 
 
 class UserCreationForm(forms.ModelForm):
@@ -191,3 +191,4 @@ admin.site.register(User, UserAdmin)
 # unregister the Group model from admin.
 # admin.site.unregister(Group)
 admin.site.register(Audit)
+admin.site.register(ActionList)

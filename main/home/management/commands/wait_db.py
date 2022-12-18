@@ -3,8 +3,8 @@ import time
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db import OperationalError, connections
-from main.utility.functions import LoggingService
 
+from main.utility.functions import LoggingService
 
 log = LoggingService()
 
