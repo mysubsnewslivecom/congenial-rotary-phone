@@ -1,18 +1,18 @@
+from datetime import datetime
+
+from bs4 import BeautifulSoup as BS
 from django.conf import settings
-from rest_framework.response import Response
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from rest_framework import viewsets
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from rest_framework import viewsets
+from rest_framework.response import Response
 
 from main.api import serializers
 from main.movieflex.models import Media, Watching
 from main.utility import WebScrapping
-from datetime import datetime
 from main.utility.functions import LoggingService
-from bs4 import BeautifulSoup as BS
-
 
 log = LoggingService()
 
@@ -48,7 +48,7 @@ class WebScrappingViewset(viewsets.ViewSet):
             ep = a.find("ep").text
             pub_date = a.find("pubDate").text
             description = a.find("description").text
-            img = BS(description, 'html.parser').find("img").get("src")
+            img = BS(description, "html.parser").find("img").get("src")
             published = datetime.strptime(pub_date, "%a, %d %b %Y %H:%M:%S %z")
             published = published.strftime("%a, %d-%b-%Y %H:%M:%S")
             article = {

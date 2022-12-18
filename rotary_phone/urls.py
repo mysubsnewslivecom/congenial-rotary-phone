@@ -11,5 +11,6 @@ urlpatterns = [
     path("api/", include("main.api.urls")),
     path("git/", include("main.gitsvn.urls")),
     path("health/", include("main.health.urls")),
+    path("system/", include("main.system.urls")),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

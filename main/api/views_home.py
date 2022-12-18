@@ -53,5 +53,3 @@ class EPLListing(viewsets.ViewSet):
             team_list.append(dict_temp)
 
         return Response(team_list)
-
-

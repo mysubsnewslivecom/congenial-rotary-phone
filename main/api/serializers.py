@@ -4,6 +4,7 @@ from rest_framework import serializers
 from main.gitsvn.models import ProjectDetail
 from main.health.models import DailyTracker, Rule
 from main.movieflex.models import Media, Watching
+from main.system.models import SystemProperty
 from main.tasks.models import Todo
 
 
@@ -85,6 +86,7 @@ class WebscrapingSerializer(serializers.Serializer):
     ep = serializers.CharField()
     description = serializers.CharField()
 
+
 class EPLSerializer(serializers.Serializer):
     position = serializers.IntegerField()
     team = serializers.CharField()
@@ -95,3 +97,8 @@ class EPLSerializer(serializers.Serializer):
     goal_difference = serializers.IntegerField()
     points = serializers.IntegerField()
 
+
+class SystemPropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SystemProperty
+        fields = ("name", "value")

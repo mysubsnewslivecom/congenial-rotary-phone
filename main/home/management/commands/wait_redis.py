@@ -1,13 +1,13 @@
 import time
 
-from django.core.management.base import BaseCommand
-from django_redis import get_redis_connection
-from main.utility.functions import LoggingService
 import redis
 from django.conf import settings
+from django.core.management.base import BaseCommand
 
+from main.utility.functions import LoggingService
 
 log = LoggingService()
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):

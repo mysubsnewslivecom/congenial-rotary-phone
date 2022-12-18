@@ -82,3 +82,16 @@ class Category(PrimaryIdMixin, TimestampMixin, ActiveStatusMixin):
 
     def __str__(self) -> str:
         return "| ".join([str(self.category), str(self.sub_category)])
+
+
+class ActionList(PrimaryIdMixin, ActiveStatusMixin, TimestampMixin):
+    name = models.CharField(_("name"), max_length=50)
+    action = models.CharField(_("Action list"), max_length=250)
+
+
+    class Meta:
+        unique_together = ["name", "action"]
+        ordering = ["-name"]
+
+    def __str__(self) -> str:
+        return "| ".join([str(self.name), str(self.action)])
