@@ -6,8 +6,8 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.management.base import BaseCommand
 
 from main.health.models import DailyTracker, Rule
+from main.home.mixins import AuditMixins, ActionsCls
 from main.utility.functions import LoggingService
-from main.home.mixins import AuditMixins
 
 log = LoggingService()
 
@@ -23,6 +23,7 @@ class Command(AuditMixins, BaseCommand):
         parser.add_argument("-d", "--date", type=str)
 
     def handle(self, *args, **options):
+        act = ActionsCls("reload_health")
         date_today = (
             options["date"]
             if options["date"]
@@ -30,6 +31,7 @@ class Command(AuditMixins, BaseCommand):
         )
         self.info(f"{date_today = }")
         rules_id = Rule.objects.filter(is_active=True).order_by("-id")
+        act.update_actions(1)
         data_tracker_obj = [
             DailyTracker(date=date_today, rule_id=ri, status=False) for ri in rules_id
         ]
@@ -38,14 +40,15 @@ class Command(AuditMixins, BaseCommand):
         result = DailyTracker.objects.bulk_create(
             data_tracker_obj, ignore_conflicts=True
         )
-        self.debug("Setting DailyTracker data to cache")
+        self.debug("Setting DailyTracker data to cache", **act.task_id)
         daily_tracker_today = DailyTracker.objects.get_daily_status()
+        act.update_actions(2)
         cache.set(
             f"{REDIS_KEY_PREFIX}_models__daily_tracker_today",
             daily_tracker_today,
             60 * 5,
         )
-
+        act.update_actions(3)
 
 # data_arr, obj, data_tracker_obj, default_rules = (list(),) * 4
 

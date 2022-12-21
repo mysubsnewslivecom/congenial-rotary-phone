@@ -4,7 +4,7 @@ from django.db import models
 from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 
-from main.utility.common import STATUS
+from main.utility import STATUS
 from main.utility.functions import LoggingService
 
 log = LoggingService()

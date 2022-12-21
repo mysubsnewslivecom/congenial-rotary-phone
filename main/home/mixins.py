@@ -1,8 +1,11 @@
 from uuid import uuid4
 
-from main.home.models import Audit
+from main.home.models import Audit, ActionList, ActionLog
 from main.utility.common import Status
 from main.utility.functions import LoggingService
+
+
+log = LoggingService()
 
 
 class AuditMixins:
@@ -93,3 +96,31 @@ class AuditMixins:
         # audit.task_id = kwargs["task_id"] if 'task_id' in kwargs.keys() else None
         audit.save()
         # self.info("saved")
+
+
+class ActionsCls(AuditMixins):
+    def __init__(self, module: str):
+        super().__init__()
+        self.module = module
+        self.query = ActionList.objects.filter(name=module).order_by("id")
+        assert self.query, f"{module} not found"
+        self.uuid = self.generate_uuid()
+        self.create_actions()
+        self.task_id = {"task_id": self.uuid}
+
+    def create_actions(self):
+        obj = list()
+
+        obj = [(ActionLog(action_id=query_id, uuid=self.uuid)) for query_id in self.query]
+        result = ActionLog.objects.bulk_create(obj)
+        log.info(result)
+
+    def update_actions(self, id):
+        ActionLog.objects.filter(uuid=self.uuid, action_id=id).update(status="COMPLETED")
+
+        self.info(f"{id} updated", **self.task_id)
+
+
+# act = ActionsCls(module="reload_health")
+
+# act.create_actions()

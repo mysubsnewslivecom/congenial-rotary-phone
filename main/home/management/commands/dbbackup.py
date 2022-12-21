@@ -8,8 +8,8 @@ from django.conf import settings
 from django.core.management import BaseCommand, call_command
 from django.utils import timezone
 from django.utils.timezone import make_aware
-from main.utility.functions import LoggingService
 
+from main.utility.functions import LoggingService
 
 log = LoggingService()
 today = timezone.now()

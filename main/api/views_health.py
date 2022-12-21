@@ -5,7 +5,7 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.vary import vary_on_cookie
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.response import Response
 
 from main.api import serializers
@@ -74,7 +74,7 @@ class DailyActivityViewset(EnablePartialUpdateMixin, viewsets.ModelViewSet):
 
 
 class TriggerHealth(AuditMixins, viewsets.ViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
     serializer_class = serializers.TriggerHealthSerializer
     http_method_names = ["post"]
 

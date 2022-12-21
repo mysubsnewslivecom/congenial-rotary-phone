@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone as tz
 from django.utils.translation import gettext_lazy as _
+import uuid
 
 from main.utility.mixins import (
     ActiveStatusMixin,
@@ -88,10 +89,27 @@ class ActionList(PrimaryIdMixin, ActiveStatusMixin, TimestampMixin):
     name = models.CharField(_("name"), max_length=50)
     action = models.CharField(_("Action list"), max_length=250)
 
-
     class Meta:
         unique_together = ["name", "action"]
         ordering = ["-name"]
 
     def __str__(self) -> str:
         return "| ".join([str(self.name), str(self.action)])
+
+
+class ActionLog(PrimaryIdMixin, ActiveStatusMixin, TimestampMixin):
+    action_id = models.ForeignKey(
+        to="home.ActionList",
+        to_field="id",
+        verbose_name=_("Action id"),
+        on_delete=models.DO_NOTHING,
+        related_name="actions",
+    )
+    status = models.CharField(_("status"), max_length=50, default="PENDING")
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=False)
+
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self) -> str:
+        return "| ".join([str(self.action_id), str(self.status)])
