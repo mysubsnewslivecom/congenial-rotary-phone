@@ -1,0 +1,102 @@
+button.button, a.button {
+    background-color: papayawhip;
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    padding: 12px 12px 12px 12px;
+    border-radius: 15px 15px 0px 15px;
+    transition-duration: 0.4s;
+    border: 1px;
+    margin: 6px 4px;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    transition: 0.1s linear;
+    outline: 0;
+    border: 0;
+    /* padding: 12px 40px; */
+    /* font-size: 18px; */
+    /* background: #4b00ff; */
+    box-shadow: 5px 5px 25px 1px rgba(0, 0, 0, 0.25);
+}
+
+.button:hover {
+    box-shadow: 0 14px 18px 0 grey, 0 17px 50px 0 grey;
+}
+.button22:hover {
+    box-shadow: 0 14px 18px 0 grey, 0 17px 50px 0 grey;
+    color: whitesmoke;
+    background-color: midnightblue;
+    /* Green */
+}
+
+button22:active {
+    box-shadow: 3px 2px 25px 1px rgba(0, 0, 0, 0.25);
+    transform: scale(0.65);
+    /* box-shadow: 3px 2px 25px 1px rgba(0,0,0,0.25); */
+
+}
+
+button.button:active {
+    transform: scale(0.85);
+    box-shadow: 3px 2px 25px 1px rgba(0, 0, 0, 0.25);
+}
+
+.no-border {
+    border: 0;
+    box-shadow: none;
+}
+
+td>input[type=text], input[type=number] {
+    border: 0;
+    box-shadow: none;
+}
+
+/* button.btn {
+    border: 0;
+    padding: 12px 40px;
+    font-size: 18px;
+    background: #4b00ff;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 5px 5px 25px 1px rgba(0,0,0,0.25);
+    cursor: pointer;
+    outline: 0;
+    transition: 0.3s linear;
+}
+button.btn:active {
+    transform: scale(0.85);
+    box-shadow: 3px 2px 25px 1px rgba(0,0,0,0.25);
+} */
+
+select {
+    appearance: none;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-position: right .75rem center;
+    background-repeat: no-repeat;
+    background-size: 16px 12px;
+    border-radius: .25rem;
+    border: 1px solid #ced4da;
+    color: #212529;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: .375rem 2.25rem .375rem .75rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    width: 65%;
+    -moz-appearance: none;
+    -moz-padding-start: calc(0.75rem - 3px);
+    -webkit-appearance: none;
+}
+
+.b-divider {
+    height: .5px;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
